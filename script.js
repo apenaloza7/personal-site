@@ -20,4 +20,5 @@ function createBubbles() {
   }
 }
 
-createBubbles();
+// Wait for the DOM to be fully loaded before creating bubbles
+document.addEventListener("DOMContentLoaded", createBubbles);
