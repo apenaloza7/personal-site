@@ -6,6 +6,18 @@
     <title>My Personal Website</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              hackerGreen: "#00ff00",
+              hackerDark: "#0f0f0f",
+            },
+          },
+        },
+      };
+    </script>
   </head>
   <body class="flex flex-col items-center min-h-screen">
     <!-- Header -->
@@ -63,7 +75,7 @@
     <!-- Footer -->
     <footer class="mt-auto py-5 text-center border-t border-green-500 w-full">
       <p>
-        &copy; 2024 [Your Name] | Built with
+        &copy; 2024 Alejandro Penaloza | Built with
         <span class="text-green-500">💻</span>
       </p>
     </footer>
