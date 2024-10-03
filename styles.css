@@ -32,20 +32,6 @@ body.light-mode a:hover {
   color: #228b22;
 }
 
-/* Tab content display settings with animation */
-.tab-pane {
-  display: none;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-}
-
-.tab-pane.active {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* Button styles */
 button {
   cursor: pointer;
@@ -61,26 +47,7 @@ button {
   transform: scale(1.1);
 }
 
-/* Tab button animations */
-.tab-link {
-  cursor: pointer;
-  flex-grow: 1;
-  transition: background-color 0.2s ease, transform 0.3s;
-}
-
-.tab-link:hover {
-  background-color: #28a745;
-  transform: translateY(-2px);
-}
-
-/* Make sure everything fits well on mobile */
-@media (max-width: 640px) {
-  .tab-link {
-    font-size: 0.875rem; /* Smaller text size for mobile */
-  }
-
-  #darkModeToggle {
-    right: 10px;
-    top: 10px;
-  }
+/* Footer border color */
+footer {
+  border-color: #00ff00;
 }
