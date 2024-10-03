@@ -10,8 +10,18 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="tailwind-config.js"></script>
-    <!-- Separate Tailwind config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              hackerGreen: "#00ff00",
+              hackerDark: "#0f0f0f",
+            },
+          },
+        },
+      };
+    </script>
   </head>
   <body class="flex flex-col items-center min-h-screen relative">
     <!-- Dark Mode Toggle Button -->
@@ -24,9 +34,8 @@
 
     <!-- Header -->
     <header class="text-center py-10">
-      <h1 class="text-4xl font-bold">Alejandro Penaloza</h1>
-      <p class="text-lg">Software Engineer & Developer</p>
-      <p class="text-lg">Currently building @ The Hartford</p>
+      <h1 class="text-4xl font-bold">[Your Name]</h1>
+      <p class="text-lg">Software Engineer & Developer | Hacker Enthusiast</p>
     </header>
 
     <!-- About Section -->
@@ -98,7 +107,6 @@
       </p>
     </footer>
 
-    <script src="dark-mode.js"></script>
-    <!-- Separate Dark Mode JS -->
+    <script src="script.js"></script>
   </body>
 </html>
