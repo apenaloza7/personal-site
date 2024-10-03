@@ -1,4 +1,4 @@
-// Get the toggle button and body element
+// Get the toggle button and body element for dark mode
 const darkModeToggle = document.getElementById("darkModeToggle");
 const body = document.body;
 
@@ -19,4 +19,22 @@ darkModeToggle.addEventListener("click", () => {
     body.classList.add("dark-mode");
     localStorage.setItem("mode", "dark-mode");
   }
+});
+
+// Tab switching functionality
+const tabLinks = document.querySelectorAll(".tab-link");
+const tabPanes = document.querySelectorAll(".tab-pane");
+
+tabLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    // Hide all tab panes
+    tabPanes.forEach((pane) => pane.classList.add("hidden"));
+    // Remove active state from all tabs
+    tabLinks.forEach((link) => link.classList.remove("active"));
+    // Show the clicked tab's content
+    const target = document.getElementById(link.dataset.target);
+    target.classList.remove("hidden");
+    // Set clicked tab to active
+    link.classList.add("active");
+  });
 });

@@ -23,7 +23,8 @@
     <!-- Header -->
     <header class="text-center py-10">
       <h1 class="text-4xl font-bold">Alejandro Penaloza</h1>
-      <p class="text-lg">Software Engineer & Developer | Hacker Enthusiast</p>
+      <p class="text-lg">Software Engineer & Developer</p>
+      <p class="text-lg">Currently building @ The Hartford</p>
       <!-- Dark Mode Toggle Button -->
       <button
         id="darkModeToggle"
@@ -33,49 +34,84 @@
       </button>
     </header>
 
-    <!-- About Section -->
-    <section id="about" class="w-3/4 md:w-1/2 my-10">
-      <h2 class="text-3xl mb-4">About Me</h2>
-      <p class="text-lg leading-loose">
-        I'm a software engineer specializing in Gosu development with experience
-        in the insurance industry. I enjoy solving complex problems and
-        improving systems' efficiency.
-      </p>
-    </section>
+    <!-- Tab Navigation -->
+    <div class="w-full max-w-md mt-6">
+      <nav class="flex justify-around bg-green-700 text-white rounded-md">
+        <button class="tab-link py-2 px-4" data-target="about">About Me</button>
+        <button class="tab-link py-2 px-4" data-target="jobs">
+          Experience
+        </button>
+        <button class="tab-link py-2 px-4" data-target="hobbies">
+          Hobbies
+        </button>
+        <button class="tab-link py-2 px-4" data-target="contacts">
+          Contact
+        </button>
+      </nav>
+    </div>
 
-    <!-- Jobs Section -->
-    <section id="jobs" class="w-3/4 md:w-1/2 my-10">
-      <h2 class="text-3xl mb-4">Experience</h2>
-      <ul class="list-disc pl-5 text-lg">
-        <li>Software Engineer at [Company Name] - August 2023 - Present</li>
-        <li>
-          Associate Software Engineer at [Company Name] - June 2021 - August
-          2023
-        </li>
-      </ul>
-    </section>
+    <!-- Tab Content -->
+    <div class="tab-content w-full max-w-md my-10 text-center">
+      <!-- About Section -->
+      <section id="about" class="tab-pane active">
+        <h2 class="text-3xl mb-4">About Me</h2>
+        <p class="text-lg leading-loose">
+          I'm a software engineer specializing in Gosu development with
+          experience in the insurance industry. I enjoy solving complex problems
+          and improving systems' efficiency.
+        </p>
+      </section>
 
-    <!-- Hobbies Section -->
-    <section id="hobbies" class="w-3/4 md:w-1/2 my-10">
-      <h2 class="text-3xl mb-4">Hobbies</h2>
-      <p class="text-lg">
-        In my free time, I enjoy hacking, exploring cybersecurity topics,
-        contributing to open-source projects, and gaming.
-      </p>
-    </section>
+      <!-- Jobs Section -->
+      <section id="jobs" class="tab-pane hidden">
+        <h2 class="text-3xl mb-4">Experience</h2>
+        <ul class="list-disc pl-5 text-lg">
+          <li>Software Engineer at [Company Name] - August 2023 - Present</li>
+          <li>
+            Associate Software Engineer at [Company Name] - June 2021 - August
+            2023
+          </li>
+        </ul>
+      </section>
 
-    <!-- Social Media Contacts -->
-    <section id="contacts" class="w-3/4 md:w-1/2 my-10">
-      <h2 class="text-3xl mb-4">Connect with Me</h2>
-      <ul class="list-none text-lg space-y-2">
-        <li><a href="mailto:youremail@example.com">Email</a></li>
-      </ul>
-    </section>
+      <!-- Hobbies Section -->
+      <section id="hobbies" class="tab-pane hidden">
+        <h2 class="text-3xl mb-4">Hobbies</h2>
+        <p class="text-lg">
+          In my free time, I enjoy hacking, exploring cybersecurity topics,
+          contributing to open-source projects, and gaming.
+        </p>
+      </section>
+
+      <!-- Social Media Contacts Section -->
+      <section id="contacts" class="tab-pane hidden">
+        <h2 class="text-3xl mb-4">Connect with Me</h2>
+        <ul class="list-none text-lg space-y-2">
+          <li>
+            <a
+              href="https://github.com/yourgithub"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://linkedin.com/in/yourlinkedin"
+              target="_blank"
+              rel="noopener noreferrer"
+              >LinkedIn</a
+            >
+          </li>
+          <li><a href="mailto:youremail@example.com">Email</a></li>
+        </ul>
+      </section>
+    </div>
 
     <!-- Footer -->
     <footer class="mt-auto py-5 text-center border-t border-green-500 w-full">
       <p>
-        &copy; 2024 Alejandro Penaloza | Built with
+        &copy; 2024 [Your Name] | Built with
         <span class="text-green-500">💻</span>
       </p>
     </footer>
