@@ -4,6 +4,11 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
+/* Custom hacker green color */
+.text-hackerGreen {
+  color: #00ff00;
+}
+
 /* Dark Mode Styles */
 body.dark-mode {
   background-color: #0f0f0f;
