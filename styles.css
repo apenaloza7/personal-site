@@ -6,7 +6,7 @@ body {
 
 /* Custom hacker green color */
 .text-hackerGreen {
-  color: #025702;
+  color: #0e6b0e;
 }
 
 /* Dark Mode Styles */
@@ -55,4 +55,46 @@ button {
 /* Footer border color */
 footer {
   border-color: #00ff00;
+}
+
+/* Stretch sections */
+.max-w-4xl {
+  max-width: 80rem; /* Increased width for more space */
+}
+
+/* Fade-in Animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glowing hover effect for dark mode button */
+.glow-hover:hover {
+  box-shadow: 0 0 8px #00ff00, 0 0 15px #00ff00;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Pulse effect on icons */
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
