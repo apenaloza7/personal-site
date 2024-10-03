@@ -21,19 +21,28 @@ darkModeToggle.addEventListener("click", () => {
   }
 });
 
-// Tab switching functionality
+// Tab switching functionality with animations
 const tabLinks = document.querySelectorAll(".tab-link");
 const tabPanes = document.querySelectorAll(".tab-pane");
 
 tabLinks.forEach((link) => {
   link.addEventListener("click", () => {
     // Hide all tab panes
-    tabPanes.forEach((pane) => pane.classList.add("hidden"));
+    tabPanes.forEach((pane) => {
+      pane.classList.remove("active");
+      pane.style.display = "none";
+    });
+
     // Remove active state from all tabs
     tabLinks.forEach((link) => link.classList.remove("active"));
-    // Show the clicked tab's content
+
+    // Show the clicked tab's content with a small delay for the animation
     const target = document.getElementById(link.dataset.target);
-    target.classList.remove("hidden");
+    setTimeout(() => {
+      target.classList.add("active");
+      target.style.display = "block";
+    }, 50);
+
     // Set clicked tab to active
     link.classList.add("active");
   });

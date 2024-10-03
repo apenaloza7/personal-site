@@ -19,32 +19,35 @@
       };
     </script>
   </head>
-  <body class="flex flex-col items-center min-h-screen">
+  <body class="flex flex-col items-center min-h-screen relative">
+    <!-- Dark Mode Toggle Button -->
+    <button
+      id="darkModeToggle"
+      class="absolute top-4 right-4 px-2 py-1 bg-green-500 text-black rounded-md text-sm hover:bg-green-600"
+    >
+      🌙
+    </button>
+
     <!-- Header -->
     <header class="text-center py-10">
       <h1 class="text-4xl font-bold">Alejandro Penaloza</h1>
       <p class="text-lg">Software Engineer & Developer</p>
       <p class="text-lg">Currently building @ The Hartford</p>
-      <!-- Dark Mode Toggle Button -->
-      <button
-        id="darkModeToggle"
-        class="mt-4 px-4 py-2 bg-green-500 text-black rounded-md hover:bg-green-600"
-      >
-        Toggle Dark Mode
-      </button>
     </header>
 
     <!-- Tab Navigation -->
     <div class="w-full max-w-md mt-6">
       <nav class="flex justify-around bg-green-700 text-white rounded-md">
-        <button class="tab-link py-2 px-4" data-target="about">About Me</button>
-        <button class="tab-link py-2 px-4" data-target="jobs">
+        <button class="tab-link py-2 px-4 mx-2" data-target="about">
+          About Me
+        </button>
+        <button class="tab-link py-2 px-4 mx-2" data-target="jobs">
           Experience
         </button>
-        <button class="tab-link py-2 px-4" data-target="hobbies">
+        <button class="tab-link py-2 px-4 mx-2" data-target="hobbies">
           Hobbies
         </button>
-        <button class="tab-link py-2 px-4" data-target="contacts">
+        <button class="tab-link py-2 px-4 mx-2" data-target="contacts">
           Contact
         </button>
       </nav>
