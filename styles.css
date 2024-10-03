@@ -2,6 +2,7 @@
 body {
   font-family: "Courier New", Courier, monospace;
   transition: background-color 0.3s, color 0.3s;
+  padding: 20px; /* Add default padding for all devices */
 }
 
 /* Custom hacker green color */
@@ -126,5 +127,39 @@ a:hover i {
   }
   50% {
     border-color: #0e6b0e;
+  }
+}
+
+/* Add more padding for mobile devices */
+@media (max-width: 640px) {
+  body {
+    padding: 16px; /* Ensures space around the edges on smaller screens */
+  }
+
+  .max-w-4xl {
+    max-width: 90%; /* Ensures content doesn't stretch edge-to-edge on mobile */
+  }
+
+  section {
+    padding: 20px 0; /* Add some vertical padding between sections */
+  }
+
+  footer {
+    padding: 30px 0; /* Extra padding at the bottom */
+  }
+}
+
+/* Additional responsive tweaks */
+@media (min-width: 641px) {
+  .max-w-4xl {
+    max-width: 80rem; /* Default for larger screens */
+  }
+
+  section {
+    padding: 40px 0; /* More padding for desktop views */
+  }
+
+  footer {
+    padding: 50px 0; /* Extra space at the bottom for larger screens */
   }
 }
