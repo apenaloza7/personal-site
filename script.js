@@ -20,3 +20,11 @@ darkModeToggle.addEventListener("click", () => {
     localStorage.setItem("mode", "dark-mode");
   }
 });
+
+let nameClicks = 0;
+document.getElementById("nameHeader").addEventListener("click", function () {
+  nameClicks++;
+  if (nameClicks === 3) {
+    window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // Rickroll URL
+  }
+});
