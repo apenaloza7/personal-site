@@ -48,6 +48,32 @@ button {
   transition: background-color 0.3s, transform 0.3s ease;
 }
 
+/* Dark mode toggle button icon visibility */
+body.dark-mode #darkModeToggle .light-icon {
+  display: inline; /* Show moon in dark mode */
+}
+
+body.dark-mode #darkModeToggle .dark-icon {
+  display: none; /* Hide sun in dark mode */
+}
+
+body.light-mode #darkModeToggle .light-icon {
+  display: none; /* Hide moon in light mode */
+}
+
+body.light-mode #darkModeToggle .dark-icon {
+  display: inline; /* Show sun in light mode */
+}
+
+/* Default: Assume light mode if neither class is present initially */
+#darkModeToggle .light-icon {
+  display: none;
+}
+
+#darkModeToggle .dark-icon {
+  display: inline;
+}
+
 /* Hover animation for dark mode toggle */
 #darkModeToggle:hover {
   transform: scale(1.1);
