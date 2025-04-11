@@ -46,6 +46,7 @@ button {
 /* Dark mode toggle button */
 #darkModeToggle {
   transition: background-color 0.3s, transform 0.3s ease;
+  animation: float-animation-button 3s ease-in-out infinite; /* Added floating animation */
 }
 
 /* Dark mode toggle button icon visibility */
