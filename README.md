@@ -22,7 +22,7 @@ Want to take it for a spin?
 
 1.  **Clone the repo:**
     ```bash
-    git clone https://github.com/[YourUsername]/personal-site.git
+    git clone https://github.com/apenaloza7/personal-site.git
     cd personal-site
     ```
 2.  **Open `index.html`:**
