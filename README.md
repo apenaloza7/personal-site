@@ -31,7 +31,7 @@ Want to take it for a spin?
 
 ## 🔗 Links
 
-*   **Live Site:** penaloza.dev
+*   **Live Site:** https://penaloza.dev
 *   **LinkedIn:** https://www.linkedin.com/in/penalozaalejandro/
 
 ---
