@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Personal website of Alejandro Penaloza, a Software Engineer based in Charlotte, NC specializing in Java & Gosu development.">
 
     <!-- Begin Inspectlet Asynchronous Code -->
     <script type="text/javascript">
@@ -55,8 +56,9 @@
     <button
       id="darkModeToggle"
       class="absolute top-4 right-4 p-2 bg-green-500 text-black rounded-md text-sm hover:bg-green-600 glow-hover z-10"
+      aria-label="Toggle dark mode"
     >
-      🌙 Click Me!
+      <span class="light-icon">🌙</span> <span class="dark-icon">☀️</span>
     </button>
 
     <!-- Header -->
@@ -160,13 +162,7 @@
       <h2 class="text-3xl mb-4 text-hackerGreen">Hobbies</h2>
       <p class="text-lg leading-loose max-w-4xl mx-auto">
         In my free time, I enjoy learning about new frameworks & processes,
-        trying new places to eat, running, and most importantly supporting
-        <a
-          href="https://www.realmadrid.com/en-US"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Real Madrid</a
-        >!
+        trying new places to eat, running, and watching soccer.
       </p>
     </section>
 
@@ -202,12 +198,43 @@
       class="mt-auto py-5 text-center border-t border-green-500 w-full fade-in"
     >
       <p>
-        &copy; 2024 Alejandro Penaloza | Built with love (and with help from
-        Claude😇)
+        &copy; 2025 Alejandro Penaloza | Built with love (and <a href="https://www.cursor.com/" target="_blank" rel="noopener noreferrer">
+          Cursor</a>)
         <span class="text-green-500">💻</span>
       </p>
     </footer>
 
+    <!-- Terminal Modal -->
+    <div id="terminal-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+      <div class="relative w-full max-w-3xl">
+        <button id="terminal-close-button" class="absolute top-2 right-2 text-hackerGreen hover:text-white text-2xl font-bold">&times;</button>
+        <!-- Terminal Content -->
+        <section id="terminal-section" class="w-full mx-auto">
+          <!-- Removed h2 header, modal implies context -->
+          <div id="terminal" class="bg-hackerDark text-hackerGreen p-4 rounded-lg h-80 overflow-y-auto font-mono text-sm border-2 border-hackerGreen glow-hover" onclick="document.getElementById('terminal-input').focus();">
+            <div id="terminal-output">
+              <div>Welcome to PenaTerm! Type 'help' for available commands.</div>
+            </div>
+            <div class="flex items-center">
+              <span class="text-hackerGreen mr-2">user@pena-site:~$</span>
+              <input type="text" id="terminal-input" class="bg-transparent border-none text-hackerGreen flex-grow focus:outline-none" autocomplete="off">
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Floating Terminal Toggle Button -->
+    <button id="terminal-toggle-button" class="fixed bottom-5 right-5 bg-hackerGreen text-hackerDark p-3 rounded-full shadow-lg hover:bg-green-700 glow-hover z-40" title="Open Terminal">
+      <i class="fas fa-terminal"></i> <!-- Font Awesome terminal icon -->
+    </button>
+
+    <!-- Splash Text -->
+    <div id="splash-text" class="fixed bottom-20 right-5 bg-yellow-300 text-black p-2 rounded shadow-lg text-xs font-bold transform -rotate-6 hidden z-40">
+      Try the new terminal! &gt;&gt;
+    </div>
+
     <script src="script.js"></script>
+    <script src="terminal.js" defer></script>
   </body>
 </html>
