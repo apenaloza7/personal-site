@@ -48,6 +48,32 @@ button {
   transition: background-color 0.3s, transform 0.3s ease;
 }
 
+/* Dark mode toggle button icon visibility */
+body.dark-mode #darkModeToggle .light-icon {
+  display: inline; /* Show moon in dark mode */
+}
+
+body.dark-mode #darkModeToggle .dark-icon {
+  display: none; /* Hide sun in dark mode */
+}
+
+body.light-mode #darkModeToggle .light-icon {
+  display: none; /* Hide moon in light mode */
+}
+
+body.light-mode #darkModeToggle .dark-icon {
+  display: inline; /* Show sun in light mode */
+}
+
+/* Default: Assume light mode if neither class is present initially */
+#darkModeToggle .light-icon {
+  display: none;
+}
+
+#darkModeToggle .dark-icon {
+  display: inline;
+}
+
 /* Hover animation for dark mode toggle */
 #darkModeToggle:hover {
   transform: scale(1.1);
@@ -157,5 +183,186 @@ a:hover i {
 
   footer {
     padding: 50px 0; /* Extra space at the bottom for larger screens */
+  }
+}
+
+/* Terminal Styles */
+#terminal {
+  cursor: text; /* Change cursor to text type on hover */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #0e6b0e #0f0f0f; /* Hacker green scrollbar on dark background */
+}
+
+/* Webkit scrollbar styles */
+#terminal::-webkit-scrollbar {
+  width: 8px;
+}
+
+#terminal::-webkit-scrollbar-track {
+  background: #0f0f0f;
+}
+
+#terminal::-webkit-scrollbar-thumb {
+  background-color: #0e6b0e;
+  border-radius: 4px;
+  border: 2px solid #0f0f0f;
+}
+
+#terminal-output > div {
+  margin-bottom: 5px; /* Space between lines */
+}
+
+#terminal-output .command {
+  color: #ffffff; /* Make commands slightly different color if needed */
+}
+
+#terminal-output .output {
+  color: #0e6b0e; /* Standard output color */
+  white-space: pre-wrap; /* Preserve whitespace in output */
+}
+
+#terminal-input {
+  /* Basic input styles already set inline via Tailwind */
+  /* Add blinking cursor */
+  animation: terminal-blink-caret 0.75s step-end infinite;
+  border-bottom: 1px solid transparent; /* Ensure space for caret */
+}
+
+@keyframes terminal-blink-caret {
+  from,
+  to {
+    border-bottom-color: transparent;
+  }
+  50% {
+    border-bottom-color: #0e6b0e; /* Use border or background for caret */
+  }
+}
+
+#terminal-input:focus {
+  /* Remove default focus outline which might look odd */
+  outline: none;
+}
+
+.terminal-prompt {
+  margin-right: 5px; /* Space after the prompt symbol */
+}
+
+/* Terminal Modal Styles */
+#terminal-modal.show {
+  display: flex; /* Override Tailwind's hidden to show */
+}
+
+/* Adjust terminal height within modal */
+#terminal-modal #terminal {
+  height: 70vh; /* Adjust height relative to viewport height */
+  max-height: 500px; /* Set a max height */
+}
+
+#terminal-close-button {
+  /* Tailwind classes handle absolute positioning, text color/hover, size */
+  cursor: pointer;
+}
+
+/* Floating animation for the terminal button (no rotation) */
+@keyframes float-animation-button {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px); /* Move up slightly */
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Floating animation for the splash banner (with rotation) */
+@keyframes float-animation-banner {
+  0% {
+    transform: translateY(0px) rotate(-6deg); /* Maintain rotation */
+  }
+  50% {
+    transform: translateY(-6px) rotate(-6deg); /* Move up slightly and maintain rotation */
+  }
+  100% {
+    transform: translateY(0px) rotate(-6deg); /* Maintain rotation */
+  }
+}
+
+/* Floating Terminal Button */
+#terminal-toggle-button {
+  /* Tailwind classes handle fixed positioning, colors, padding, border-radius, shadow, hover, z-index */
+  transition: transform 0.2s ease-in-out;
+  animation: float-animation-button 3s ease-in-out infinite; /* Add the float animation */
+}
+
+#terminal-toggle-button:hover {
+  transform: scale(1.1); /* Keep hover scale effect */
+  animation-play-state: paused; /* Optional: Pause float animation on hover */
+}
+
+/* Splash Text Banner */
+#splash-text {
+  /* Tailwind classes handle fixed positioning, colors, padding, radius, shadow, font, transform, z-index */
+  /* Using a class to control visibility via JS */
+  display: none; /* Hidden by default */
+  animation: splash-bounce 0.5s ease-out forwards, float-animation-banner 3s ease-in-out infinite; /* Add float animation alongside bounce */
+  animation-delay: 0s, 0.5s; /* Delay float until bounce is done */
+}
+
+#splash-text.show {
+  display: block;
+}
+
+/* Simple bounce animation for splash */
+@keyframes splash-bounce {
+  0% {
+    transform: translateY(10px) rotate(-6deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-5px) rotate(-6deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) rotate(-6deg);
+    opacity: 1;
+  }
+}
+
+/* --- Mobile Adjustments --- */
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+
+  /* Modal takes more screen space */
+  #terminal-modal {
+    padding: 1rem; /* Reduce padding */
+  }
+  #terminal-modal > div { /* Target the inner container */
+    max-width: 95vw; /* Allow it to be wider */
+  }
+
+  /* Adjust terminal height in modal for mobile */
+  #terminal-modal #terminal {
+    height: 80vh; /* More vertical space */
+    max-height: none; /* Remove max height restriction */
+  }
+
+  /* Adjust Floating Button position */
+  #terminal-toggle-button {
+    bottom: 1rem;
+    right: 1rem;
+    /* Optional: slightly smaller padding if needed */
+    /* padding: 0.65rem; */
+  }
+  #terminal-toggle-button i {
+     font-size: 0.9rem; /* Slightly smaller icon */
+  }
+
+  /* Adjust Splash Text position */
+  #splash-text {
+    bottom: 4.5rem; /* Position above the adjusted button */
+    right: 1rem;
+    font-size: 0.65rem; /* Smaller font */
+    padding: 0.3rem 0.5rem; /* Smaller padding */
   }
 }
