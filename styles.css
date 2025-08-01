@@ -445,7 +445,20 @@ body.workstation-body {
         min-height: 250px; /* Give panels some minimum height */
     }
     .workstation-header {
-        flex-direction: column;
+        flex-direction: row; /* Keep it as a row */
+        flex-wrap: wrap;     /* Allow items to wrap */
+        justify-content: space-between;
         gap: 0.5rem;
+    }
+    .ticker {
+        flex-basis: 100%; /* Take full width */
+        justify-content: center;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    .market-status {
+        flex-basis: 100%;
+        justify-content: center;
+        gap: 1rem;
     }
 }
