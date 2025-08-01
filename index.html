@@ -1,184 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Personal website of Alejandro Penaloza, a Software Engineer based in Charlotte, NC specializing in Java & Gosu development.">
-
-    <!-- Begin Inspectlet Asynchronous Code -->
-    <script type="text/javascript">
-      (function () {
-        window.__insp = window.__insp || [];
-        __insp.push(["wid", 680298117]);
-        var ldinsp = function () {
-          if (typeof window.__inspld != "undefined") return;
-          window.__inspld = 1;
-          var insp = document.createElement("script");
-          insp.type = "text/javascript";
-          insp.async = true;
-          insp.id = "inspsync";
-          insp.src =
-            ("https:" == document.location.protocol ? "https" : "http") +
-            "://cdn.inspectlet.com/inspectlet.js?wid=680298117&r=" +
-            Math.floor(new Date().getTime() / 3600000);
-          var x = document.getElementsByTagName("script")[0];
-          x.parentNode.insertBefore(insp, x);
-        };
-        setTimeout(ldinsp, 0);
-      })();
-    </script>
-    <!-- End Inspectlet Asynchronous Code -->
-
-    <title>Hello, World!</title>
+    <title>Pena Terminal</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              hackerGreen: "#0e6b0e",
-              hackerDark: "#0f0f0f",
-            },
-          },
-        },
-      };
-    </script>
-  </head>
-  <body class="flex flex-col items-center min-h-screen relative p-4 md:p-10">
-    <!-- Added padding -->
-    <!-- Dark Mode Toggle Button -->
-    <button
-      id="darkModeToggle"
-      class="fixed bottom-5 left-5 p-3 bg-hackerGreen text-hackerDark rounded-full shadow-lg hover:bg-green-700 glow-hover z-40 text-sm"
-      aria-label="Toggle dark mode"
-    >
-      <span class="light-icon">🌙</span> <span class="dark-icon">☀️</span>
-    </button>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body class="workstation-body">
 
-    <!-- Header -->
-    <header class="text-center py-10 fade-in">
-      <h1
-        id="nameHeader"
-        class="text-4xl font-bold text-hackerGreen typing-effect"
-      >
-        Alejandro Penaloza
-      </h1>
-      <p class="text-lg">Software Engineer @ The Hartford</p>
-      <p class="text-lg">Charlotte, NC 📍</p>
+    <header class="workstation-header">
+        <div class="ticker">
+            <span>The Pena Index</span>
+            <span class="price-marker">
+                <span class="price">1,998.05</span>
+                <span class="change bullish">+24.06 (+1.22%)</span>
+            </span>
+        </div>
+        <div class="market-status">
+            <span class="status-item">STATUS: <span class="status-value up">ONLINE ▲</span></span>
+            <span class="status-item">LOCAL TIME: <span id="local-time" class="status-value"></span></span>
+        </div>
     </header>
 
-    <!-- About Section -->
-    <section id="about" class="my-10 text-center fade-in">
-      <h2 class="text-3xl mb-4 text-hackerGreen">About Me</h2>
-      <p class="text-lg leading-loose max-w-4xl mx-auto">
-        I am a software engineer currently specializing in Java & Gosu
-        development with experience in the insurance industry. I am passionate
-        about solving complex problems and enhancing system efficiency.
-      </p>
-    </section>
+    <main class="workstation-grid">
+        <div id="panel-profile" class="panel">
+            <div class="panel-header">[1] ENGINEER_PROFILE &lt;GO&gt;</div>
+            <div class="panel-content">
+                <h1 class="name">Alejandro Penaloza</h1>
+                <h2 class="title">Software Engineer @ The Hartford</h2>
+                <h3 class="location">Charlotte, NC 📍</h3>
+                <p class="description">
+                    I am a software engineer currently specializing in Java & Gosu development with experience in the insurance industry. I am passionate about solving complex problems and enhancing system efficiency.
+                </p>
+            </div>
+        </div>
 
-    <!-- Experience Section -->
-    <section id="jobs" class="my-10 text-center fade-in">
-      <h2 class="text-3xl mb-4 text-hackerGreen">Professional Experience</h2>
-      <div class="max-w-4xl mx-auto">
-        <ul class="list-none space-y-2">
-          <li>
-            <h3 class="text-xl font-semibold">The Hartford</h3>
-            <h4 class="text-lg font-medium">Software Engineer</h4>
-            <p class="text-sm text-gray-500">August 2023 - Present</p>
-            <h4 class="text-lg font-medium">Associate Software Engineer</h4>
-            <p class="text-sm text-gray-500">June 2021 - August 2023</p>
-          </li>
-        </ul>
-      </div>
-    </section>
+        <div id="panel-portfolio" class="panel">
+            <div class="panel-header">[2] PORTFOLIO &lt;GO&gt;</div>
+            <div class="panel-content">
+                <div class="asset-group">
+                    <div class="asset-main">
+                        <span class="asset-ticker">[THE-HARTFORD]</span>
+                        <span class="asset-status">JUN 2021 - PRESENT</span>
+                    </div>
+                    <div class="asset-sub">
+                        <span class="asset-details">Software Engineer</span>
+                        <span class="asset-status-sub">AUG 2023 - PRESENT</span>
+                    </div>
+                    <div class="asset-sub">
+                        <span class="asset-details">Associate Software Engineer</span>
+                        <span class="asset-status-sub">JUN 2021 - AUG 2023</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Hobbies Section -->
-    <section id="hobbies" class="my-10 text-center fade-in">
-      <h2 class="text-3xl mb-4 text-hackerGreen">Hobbies</h2>
-      <p class="text-lg leading-loose max-w-4xl mx-auto">
-        In my free time, I enjoy learning about new frameworks & processes,
-        trying new places to eat, running, and watching soccer.
-      </p>
-    </section>
+        <div id="panel-terminal" class="panel">
+            <div class="panel-header">[3] SHELL &lt;GO&gt;</div>
+            <div class="panel-content">
+                <div id="terminal" class="terminal-container">
+                    <div id="terminal-output">
+                        <div>Welcome to PenaTerm! Type 'help' for available commands.</div>
+                    </div>
+                    <div class="terminal-input-line">
+                        <span class="prompt">user@pena-site:~$</span>
+                        <input type="text" id="terminal-input" autocomplete="off">
+                    </div>
+                </div>
+                <canvas id="snake-canvas" class="hidden"></canvas>
+            </div>
+        </div>
 
-    <!-- Social Media Contacts Section -->
-    <section id="contacts" class="my-10 text-center fade-in">
-      <h2 class="text-3xl mb-4 text-hackerGreen">Want to know more?</h2>
-      <ul class="list-none text-lg space-y-2">
-        <li>
-          <a
-            href="https://github.com/apenaloza7"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><i class="fab fa-github pulse"></i> GitHub</a
-          >
-          <a
-            href="https://www.linkedin.com/in/penalozaalejandro/"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><i class="fab fa-linkedin pulse"></i> LinkedIn</a
-          >
-          <a
-            href="https://www.youtube.com/@penapoppin"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><i class="fab fa-youtube pulse"></i> YouTube</a
-          >
-        </li>
-      </ul>
-    </section>
+        <div id="panel-hobbies" class="panel">
+            <div class="panel-header">[4] PERSONAL HOLDINGS &lt;GO&gt;</div>
+            <div class="panel-content">
+                <div class="hobby-asset">
+                    <span class="asset-ticker">[PKBL]</span>
+                    <span class="asset-name">Pickleball</span>
+                    <span class="asset-performance bullish">BULLISH ▲</span>
+                </div>
+                <div class="hobby-asset">
+                    <span class="asset-ticker">[GOLF]</span>
+                    <span class="asset-name">Golf</span>
+                    <span class="asset-performance bullish">BULLISH ▲</span>
+                </div>
+                <div class="hobby-asset">
+                    <span class="asset-ticker">[RUN]</span>
+                    <span class="asset-name">Running</span>
+                    <span class="asset-performance neutral">NEUTRAL ▶</span>
+                </div>
+                <div class="hobby-asset">
+                    <span class="asset-ticker">[SOCR]</span>
+                    <span class="asset-name">Soccer</span>
+                    <span class="asset-performance neutral">NEUTRAL ▶</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="panel-contact" class="panel">
+            <div class="panel-header">[5] MSG &lt;GO&gt;</div>
+            <div class="panel-content">
+                <a href="https://github.com/apenaloza7" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <i class="fab fa-github"></i> GITHUB
+                </a>
+                <a href="https://www.linkedin.com/in/penalozaalejandro/" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <i class="fab fa-linkedin"></i> LINKEDIN
+                </a>
+                <a href="https://www.youtube.com/@penapoppin" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <i class="fab fa-youtube"></i> YOUTUBE
+                </a>
+            </div>
+        </div>
 
-    <!-- Footer -->
-    <footer
-      class="mt-auto py-5 text-center border-t border-green-500 w-full fade-in"
-    >
-      <p>
-        &copy; 2025 Alejandro Penaloza | Built with love (and <a href="https://www.cursor.com/" target="_blank" rel="noopener noreferrer">
-          Cursor</a>)
-        <span class="text-green-500">💻</span>
-      </p>
+        <div id="panel-news" class="panel">
+            <div class="panel-header">[6] NEWS & INSIGHTS &lt;GO&gt;</div>
+            <div class="panel-content">
+                <div class="news-item">
+                    <span class="news-time">14:30</span>
+                    <span class="news-tag bullish">BULLISH</span>
+                    <span class="news-headline">PENA INDEX JUMPS AS GOLF [GOLF] & PICKLEBALL [PKBL] RALLY TO ALL-TIME HIGHS</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-time">11:15</span>
+                    <span class="news-tag upgrade">UPGRADE</span>
+                    <span class="news-headline">ANALYSTS UPGRADE JAVA SKILLS TO 'OUTPERFORM' CITING STRONG FUNDAMENTALS</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-time">09:00</span>
+                    <span class="news-tag outlook">OUTLOOK</span>
+                    <span class="news-headline">THE HARTFORD [THE-HARTFORD] SEES EFFICIENCY GAINS; INSIDERS CREDIT PENALOZA'S CONTRIBUTIONS</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-time">YDAY</span>
+                    <span class="news-tag watch">WATCH</span>
+                    <span class="news-headline">MARKET WATCH: ALL EYES ON 'SNAKE' EASTER EGG FOR POTENTIAL BREAKOUT</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="workstation-footer">
+        &copy; 2025 Alejandro Penaloza | Built with love (and <a href="https://www.cursor.com/" target="_blank" rel="noopener noreferrer">Cursor</a>) <span class="footer-icon">💻</span>
     </footer>
-
-    <!-- Terminal Modal -->
-    <div id="terminal-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
-      <div class="relative w-full max-w-3xl">
-        <button id="terminal-close-button" class="absolute top-2 right-2 text-hackerGreen hover:text-white text-2xl font-bold">&times;</button>
-        <!-- Terminal Content -->
-        <section id="terminal-section" class="w-full mx-auto">
-          <!-- Removed h2 header, modal implies context -->
-          <div id="terminal" class="bg-hackerDark text-hackerGreen p-4 rounded-lg h-80 overflow-y-auto font-mono text-sm border-2 border-hackerGreen glow-hover" onclick="document.getElementById('terminal-input').focus();">
-            <div id="terminal-output">
-              <div>Welcome to PenaTerm! Type 'help' for available commands.</div>
-            </div>
-            <div class="flex items-center">
-              <span class="text-hackerGreen mr-2">user@pena-site:~$</span>
-              <input type="text" id="terminal-input" class="bg-transparent border-none text-hackerGreen flex-grow focus:outline-none" autocomplete="off">
-            </div>
-          </div>
-          <canvas id="snake-canvas" tabindex="0" class="hidden w-full h-80 bg-hackerDark border-2 border-hackerGreen rounded-lg"></canvas>
-        </section>
-      </div>
-    </div>
-
-    <!-- Floating Terminal Toggle Button -->
-    <button id="terminal-toggle-button" class="fixed bottom-5 right-5 bg-hackerGreen text-hackerDark p-3 rounded-full shadow-lg hover:bg-green-700 glow-hover z-40" title="Open Terminal">
-      <i class="fas fa-terminal"></i> <!-- Font Awesome terminal icon -->
-    </button>
-
-    <!-- Splash Text -->
-    <div id="splash-text" class="fixed bottom-20 right-5 bg-yellow-300 text-black p-2 rounded shadow-lg text-xs font-bold transform -rotate-6 hidden z-40">
-      Try the new terminal! &gt;&gt;
-    </div>
 
     <script src="script.js"></script>
     <script src="terminal.js" defer></script>
     <script src="snake.js" defer></script>
-  </body>
+</body>
 </html>

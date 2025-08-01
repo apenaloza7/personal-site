@@ -1,369 +1,394 @@
-/* Base styling for both light and dark modes */
-body {
-  font-family: "Courier New", Courier, monospace;
-  transition: background-color 0.3s, color 0.3s;
-  padding: 20px; /* Add default padding for all devices */
+/* --- Base Workstation Styles --- */
+:root {
+    --bg-color: #101010;
+    --primary-text: #F3D434; /* Bloomberg Yellow/Amber */
+    --secondary-text: #69D2E7; /* Light Blue */
+    --accent-green: #28a745; /* Money Green */
+    --accent-red: #FF4D4D; /* Market Red */
+    --border-color: #3a3a3a;
+    --font-family: 'IBM Plex Mono', monospace;
 }
 
-/* Custom hacker green color */
-.text-hackerGreen {
-  color: #0e6b0e;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* Dark Mode Styles */
-body.dark-mode {
-  background-color: #0f0f0f;
-  color: #00ff00;
+html, body {
+    height: 100%;
 }
 
-body.dark-mode a {
-  color: #00ff00;
+body.workstation-body {
+    background-color: var(--bg-color);
+    color: var(--primary-text);
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden; /* Prevent body scroll, panels will scroll */
 }
 
-body.dark-mode a:hover {
-  color: #008000;
+/* --- Header --- */
+.workstation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
 }
 
-/* Light Mode Styles */
-body.light-mode {
-  background-color: #f4f4f4;
-  color: #333;
+.ticker {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-text);
 }
 
-body.light-mode a {
-  color: #006400;
+.price-marker {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
 }
 
-body.light-mode a:hover {
-  color: #228b22;
+.price {
+    font-size: 1.2rem;
+    color: var(--primary-text);
 }
 
-/* Button styles */
-button {
-  cursor: pointer;
+.change {
+    font-size: 1rem;
 }
 
-/* Dark mode toggle button */
-#darkModeToggle {
-  transition: background-color 0.3s, transform 0.3s ease;
-  animation: float-animation-button 3s ease-in-out infinite; /* Added floating animation */
+.change.bullish {
+    color: var(--accent-green);
 }
 
-/* Dark mode toggle button icon visibility */
-body.dark-mode #darkModeToggle .light-icon {
-  display: inline; /* Show moon in dark mode */
+.cursor {
+    animation: blink 1s step-end infinite;
+    background-color: var(--accent-green);
+    display: inline-block;
+    width: 10px;
+    height: 1.5rem;
+    margin-left: 2px;
 }
 
-body.dark-mode #darkModeToggle .dark-icon {
-  display: none; /* Hide sun in dark mode */
+@keyframes blink {
+    from, to { background-color: transparent; }
+    50% { background-color: var(--accent-green); }
 }
 
-body.light-mode #darkModeToggle .light-icon {
-  display: none; /* Hide moon in light mode */
+.market-status {
+    display: flex;
+    gap: 1.5rem;
 }
 
-body.light-mode #darkModeToggle .dark-icon {
-  display: inline; /* Show sun in light mode */
+.status-item {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
 }
 
-/* Default: Assume light mode if neither class is present initially */
-#darkModeToggle .light-icon {
-  display: none;
+.status-value {
+    color: var(--primary-text);
+    font-weight: 500;
 }
 
-#darkModeToggle .dark-icon {
-  display: inline;
+.status-value.up {
+    color: var(--accent-green);
 }
 
-/* Hover animation for dark mode toggle */
-#darkModeToggle:hover {
-  transform: scale(1.1);
+/* --- Main Grid Layout --- */
+.workstation-grid {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    overflow: hidden;
 }
 
-/* Footer border color */
-footer {
-  border-color: #00ff00;
+.panel {
+    background-color: #1a1a1a;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Important for self-contained scrolling */
 }
 
-/* Stretch sections */
-.max-w-4xl {
-  max-width: 80rem; /* Increased width for more space */
+.panel-header {
+    background-color: #2a2a2a;
+    padding: 0.5rem;
+    font-weight: 700;
+    color: var(--secondary-text);
+    border-bottom: 1px solid var(--border-color);
 }
 
-/* Fade-in Animation */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 1s ease-in-out forwards;
+.panel-content {
+    padding: 1rem;
+    overflow-y: auto; /* Allow scrolling within panels */
+    flex-grow: 1;
+    font-size: 0.9rem;
+    line-height: 1.6;
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* --- Panel Specific Styles --- */
+#panel-profile .name {
+    font-size: 1.5rem;
+    color: var(--primary-text);
+    margin-bottom: 0.25rem;
 }
 
-/* Glowing hover effect for dark mode button */
-.glow-hover:hover {
-  box-shadow: 0 0 8px #00ff00, 0 0 15px #00ff00;
-  transition: box-shadow 0.3s ease-in-out;
+#panel-profile .title, #panel-profile .location {
+    font-size: 1rem;
+    color: var(--secondary-text);
+    margin-bottom: 1rem;
 }
 
-/* Pulse effect on icons */
-.pulse {
-  animation: pulse 2s infinite;
+#panel-portfolio .asset-group {
+    display: flex;
+    flex-direction: column;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+#panel-portfolio .asset-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
 }
 
-a:hover i {
-  color: #00ff00;
+#panel-portfolio .asset-sub {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    align-items: center;
+    margin-left: 2rem; /* Indent sub-assets */
+    margin-bottom: 0.5rem;
+    color: var(--secondary-text);
 }
 
-.typing-effect {
-  overflow: hidden;
-  border-right: 0.15em solid #0e6b0e;
-  white-space: nowrap;
-  animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+#panel-portfolio .asset-sub .asset-details {
+    grid-column: 1 / 3; /* Span two columns */
 }
 
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
+#panel-portfolio .asset-ticker, .hobby-asset .asset-ticker {
+    color: var(--accent-red);
+    font-weight: 700;
 }
 
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: #0e6b0e;
-  }
+#panel-portfolio .asset-name, .hobby-asset .asset-name {
+    color: var(--primary-text);
 }
 
-/* Add more padding for mobile devices */
-@media (max-width: 640px) {
-  body {
-    padding: 16px; /* Ensures space around the edges on smaller screens */
-  }
-
-  .max-w-4xl {
-    max-width: 80%; /* Ensures content doesn't stretch edge-to-edge on mobile */
-  }
-
-  section {
-    padding: 20px 0; /* Add some vertical padding between sections */
-  }
-
-  footer {
-    padding: 30px 0; /* Extra padding at the bottom */
-  }
+#panel-portfolio .asset-details {
+    color: var(--secondary-text);
 }
 
-/* Additional responsive tweaks */
-@media (min-width: 641px) {
-  .max-w-4xl {
-    max-width: 80rem; /* Default for larger screens */
-  }
-
-  footer {
-    padding: 50px 0; /* Extra space at the bottom for larger screens */
-  }
+#panel-portfolio .asset-status,
+#panel-portfolio .asset-status-sub {
+    color: #a0a0a0;
+    text-align: right;
 }
 
-/* Terminal Styles */
-#terminal {
-  cursor: text; /* Change cursor to text type on hover */
-  scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: #0e6b0e #0f0f0f; /* Hacker green scrollbar on dark background */
+#panel-portfolio .asset-status-sub {
+    font-size: 0.85rem;
 }
 
-/* Webkit scrollbar styles */
-#terminal::-webkit-scrollbar {
-  width: 8px;
+#panel-hobbies .hobby-asset {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
-#terminal::-webkit-scrollbar-track {
-  background: #0f0f0f;
+#panel-hobbies .asset-performance {
+    text-align: right;
+    font-weight: 700;
 }
 
-#terminal::-webkit-scrollbar-thumb {
-  background-color: #0e6b0e;
-  border-radius: 4px;
-  border: 2px solid #0f0f0f;
+#panel-hobbies .asset-performance.bullish {
+    color: var(--accent-green);
 }
 
-#terminal-output > div {
-  margin-bottom: 5px; /* Space between lines */
+#panel-hobbies .asset-performance.neutral {
+    color: var(--primary-text);
 }
 
-#terminal-output .command {
-  color: #ffffff; /* Make commands slightly different color if needed */
+#panel-contact .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--secondary-text);
+    text-decoration: none;
+    padding: 0.5rem;
+    transition: background-color 0.2s;
 }
 
-#terminal-output .output {
-  color: #0e6b0e; /* Standard output color */
-  white-space: pre-wrap; /* Preserve whitespace in output */
+#panel-contact .contact-link:hover {
+    background-color: var(--border-color);
+    color: var(--primary-text);
+}
+
+#panel-contact .contact-link i {
+    font-size: 1.2rem;
+    color: var(--accent-green);
+}
+
+#panel-news .news-item {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 0.75rem;
+    align-items: baseline;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+#panel-news .news-time {
+    color: #a0a0a0;
+}
+
+#panel-news .news-tag {
+    font-weight: 700;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+}
+
+#panel-news .news-tag.bullish {
+    background-color: var(--accent-green);
+    color: var(--bg-color);
+}
+
+#panel-news .news-tag.upgrade {
+    background-color: var(--secondary-text);
+    color: var(--bg-color);
+}
+
+#panel-news .news-tag.outlook {
+    background-color: var(--primary-text);
+    color: var(--bg-color);
+}
+
+#panel-news .news-tag.watch {
+    background-color: var(--accent-red);
+    color: #fff;
+}
+
+#panel-news .news-headline {
+    color: var(--primary-text);
+}
+
+
+/* --- Terminal Panel --- */
+#panel-terminal, #panel-terminal .panel-content {
+    padding: 0;
+}
+
+.terminal-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+#terminal-output {
+    flex-grow: 1;
+    overflow-y: auto;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+#terminal-output div {
+    margin-bottom: 5px;
+}
+
+.terminal-input-line {
+    display: flex;
+    align-items: center;
+}
+
+.prompt {
+    color: var(--accent-green);
+    margin-right: 0.5rem;
+    white-space: nowrap;
 }
 
 #terminal-input {
-  /* Basic input styles already set inline via Tailwind */
-  /* Add blinking cursor */
-  animation: terminal-blink-caret 0.75s step-end infinite;
-  border-bottom: 1px solid transparent; /* Ensure space for caret */
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    color: var(--primary-text);
+    font-family: var(--font-family);
+    font-size: 0.85rem;
+    outline: none;
+    border-bottom: 1px solid var(--primary-text);
 }
 
-@keyframes terminal-blink-caret {
-  from,
-  to {
-    border-bottom-color: transparent;
-  }
-  50% {
-    border-bottom-color: #0e6b0e; /* Use border or background for caret */
-  }
+@keyframes blink-caret {
+    from, to { border-bottom-color: transparent; }
+    50% { border-bottom-color: var(--primary-text); }
 }
 
-#terminal-input:focus {
-  /* Remove default focus outline which might look odd */
-  outline: none;
+#snake-canvas {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    border: 2px solid var(--accent-green);
+    border-radius: 4px;
 }
 
-.terminal-prompt {
-  margin-right: 5px; /* Space after the prompt symbol */
+.hidden {
+    display: none;
 }
 
-/* Terminal Modal Styles */
-#terminal-modal.show {
-  display: flex; /* Override Tailwind's hidden to show */
+/* --- Footer --- */
+.workstation-footer {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #a0a0a0;
+    border-top: 1px solid var(--border-color);
+    background-color: #1a1a1a;
+    flex-shrink: 0;
 }
 
-/* Adjust terminal height within modal */
-#terminal-modal #terminal {
-  height: 70vh; /* Adjust height relative to viewport height */
-  max-height: 500px; /* Set a max height */
+.workstation-footer a {
+    color: var(--secondary-text);
+    text-decoration: none;
+}
+.workstation-footer a:hover {
+    color: var(--primary-text);
+}
+.footer-icon {
+    color: var(--accent-green);
 }
 
-#terminal-close-button {
-  /* Tailwind classes handle absolute positioning, text color/hover, size */
-  cursor: pointer;
+/* --- Responsive Layout --- */
+@media (max-width: 1024px) {
+    .workstation-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto; /* Let rows size themselves */
+    }
 }
 
-/* Floating animation for the terminal button (no rotation) */
-@keyframes float-animation-button {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px); /* Move up slightly */
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-/* Floating animation for the splash banner (with rotation) */
-@keyframes float-animation-banner {
-  0% {
-    transform: translateY(0px) rotate(-6deg); /* Maintain rotation */
-  }
-  50% {
-    transform: translateY(-6px) rotate(-6deg); /* Move up slightly and maintain rotation */
-  }
-  100% {
-    transform: translateY(0px) rotate(-6deg); /* Maintain rotation */
-  }
-}
-
-/* Floating Terminal Button */
-#terminal-toggle-button {
-  /* Tailwind classes handle fixed positioning, colors, padding, border-radius, shadow, hover, z-index */
-  transition: transform 0.2s ease-in-out;
-  animation: float-animation-button 3s ease-in-out infinite; /* Add the float animation */
-}
-
-#terminal-toggle-button:hover {
-  transform: scale(1.1); /* Keep hover scale effect */
-  animation-play-state: paused; /* Optional: Pause float animation on hover */
-}
-
-/* Splash Text Banner */
-#splash-text {
-  /* Tailwind classes handle fixed positioning, colors, padding, radius, shadow, font, transform, z-index */
-  /* Using a class to control visibility via JS */
-  display: none; /* Hidden by default */
-  animation: splash-bounce 0.5s ease-out forwards, float-animation-banner 3s ease-in-out infinite; /* Add float animation alongside bounce */
-  animation-delay: 0s, 0.5s; /* Delay float until bounce is done */
-}
-
-#splash-text.show {
-  display: block;
-}
-
-/* Simple bounce animation for splash */
-@keyframes splash-bounce {
-  0% {
-    transform: translateY(10px) rotate(-6deg);
-    opacity: 0;
-  }
-  50% {
-    transform: translateY(-5px) rotate(-6deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0) rotate(-6deg);
-    opacity: 1;
-  }
-}
-
-/* --- Mobile Adjustments --- */
-@media (max-width: 768px) { /* Adjust breakpoint as needed */
-
-  /* Modal takes more screen space */
-  #terminal-modal {
-    padding: 1rem; /* Reduce padding */
-  }
-  #terminal-modal > div { /* Target the inner container */
-    max-width: 95vw; /* Allow it to be wider */
-  }
-
-  /* Adjust terminal height in modal for mobile */
-  #terminal-modal #terminal {
-    height: 80vh; /* More vertical space */
-    max-height: none; /* Remove max height restriction */
-  }
-
-  /* Adjust Floating Button position */
-  #terminal-toggle-button {
-    bottom: 1rem;
-    right: 1rem;
-    /* Optional: slightly smaller padding if needed */
-    /* padding: 0.65rem; */
-  }
-  #terminal-toggle-button i {
-     font-size: 0.9rem; /* Slightly smaller icon */
-  }
-
-  /* Adjust Splash Text position */
-  #splash-text {
-    bottom: 4.5rem; /* Position above the adjusted button */
-    right: 1rem;
-    font-size: 0.65rem; /* Smaller font */
-    padding: 0.3rem 0.5rem; /* Smaller padding */
-  }
+@media (max-width: 768px) {
+    body.workstation-body {
+        overflow: auto; /* Allow body scroll on mobile */
+    }
+    .workstation-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    .panel {
+        min-height: 250px; /* Give panels some minimum height */
+    }
+    .workstation-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 }
