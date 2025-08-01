@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     whoami - Display current user`;
                 break;
             case 'about':
-                outputLine.textContent = 'Too lazy to write about me right now, check back later! //TODO: Add about me text lazy';
+                outputLine.textContent = 'Too lazy to write about me right now, check back later!';
                 break;
             case 'experience':
                  outputLine.textContent = 'THE HARTFORD! in the heart of Southend Charlotte, NC';
