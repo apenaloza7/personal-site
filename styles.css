@@ -38,6 +38,7 @@ body.workstation-body {
     background-color: #1a1a1a;
     border-bottom: 1px solid var(--border-color);
     flex-shrink: 0;
+    flex-wrap: wrap; /* Allow ticker to wrap to the next line */
 }
 
 .ticker {
@@ -99,6 +100,60 @@ body.workstation-body {
 
 .status-value.up {
     color: var(--accent-green);
+}
+
+/* --- Sliding Ticker Styles --- */
+.sliding-ticker-container {
+    flex-basis: 100%;
+    overflow: hidden;
+    background-color: #0c0c0c;
+    padding: 0.3rem 0;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sliding-ticker-content {
+    display: flex;
+    animation: slide 30s linear infinite;
+    white-space: nowrap;
+}
+
+.ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1.5rem;
+    font-size: 0.85rem;
+}
+
+.ticker-item .ticker-name {
+    color: var(--secondary-text);
+}
+
+.ticker-item .ticker-change {
+    font-weight: 700;
+}
+
+.ticker-item .ticker-change.bullish {
+    color: var(--accent-green);
+}
+
+.ticker-item .ticker-change.neutral {
+    color: var(--primary-text);
+}
+
+.ticker-item .ticker-change.upgrade {
+    color: var(--secondary-text);
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 /* --- Main Grid Layout --- */
