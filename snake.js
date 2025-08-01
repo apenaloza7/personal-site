@@ -1,27 +1,50 @@
 function startSnakeGame(canvas, onGameOver) {
     const ctx = canvas.getContext('2d');
-    const box = 20; // Size of each square in the grid
-    let snake = [];
-    snake[0] = { x: 9 * box, y: 10 * box };
 
-    let food = {
-        x: Math.floor(Math.random() * 19 + 1) * box,
-        y: Math.floor(Math.random() * 19 + 1) * box
+    // Set canvas dimensions to match its display size
+    const style = getComputedStyle(canvas);
+    canvas.width = parseInt(style.width);
+    canvas.height = parseInt(style.height);
+
+    const box = 20; // Size of each square in the grid
+    const canvasWidthInBoxes = Math.floor(canvas.width / box);
+    const canvasHeightInBoxes = Math.floor(canvas.height / box);
+    
+    let snake = [];
+    snake[0] = { 
+        x: Math.floor(canvasWidthInBoxes / 2) * box, 
+        y: Math.floor(canvasHeightInBoxes / 2) * box 
     };
+
+    function getRandomFoodPosition() {
+        return {
+            x: Math.floor(Math.random() * canvasWidthInBoxes) * box,
+            y: Math.floor(Math.random() * canvasHeightInBoxes) * box
+        };
+    }
+
+    let food = getRandomFoodPosition();
 
     let score = 0;
     let d; // Direction
+    let game; // Game loop interval
 
-    document.addEventListener("keydown", direction);
+    const directionListener = (event) => direction(event);
+    document.addEventListener("keydown", directionListener);
 
     function direction(event) {
-        if (event.keyCode == 37 && d != "RIGHT") {
+        const key = event.keyCode;
+        if (key >= 37 && key <= 40) { // Arrow keys
+            event.preventDefault();
+        }
+        
+        if (key == 37 && d != "RIGHT") {
             d = "LEFT";
-        } else if (event.keyCode == 38 && d != "DOWN") {
+        } else if (key == 38 && d != "DOWN") {
             d = "UP";
-        } else if (event.keyCode == 39 && d != "LEFT") {
+        } else if (key == 39 && d != "LEFT") {
             d = "RIGHT";
-        } else if (event.keyCode == 40 && d != "UP") {
+        } else if (key == 40 && d != "UP") {
             d = "DOWN";
         }
     }
@@ -50,25 +73,18 @@ function startSnakeGame(canvas, onGameOver) {
         ctx.fillStyle = "red";
         ctx.fillRect(food.x, food.y, box, box);
 
-        // old head position
         let snakeX = snake[0].x;
         let snakeY = snake[0].y;
 
-        // which direction
         if (d == "LEFT") snakeX -= box;
         if (d == "UP") snakeY -= box;
         if (d == "RIGHT") snakeX += box;
         if (d == "DOWN") snakeY += box;
 
-        // if the snake eats the food
         if (snakeX == food.x && snakeY == food.y) {
             score++;
-            food = {
-                x: Math.floor(Math.random() * 19 + 1) * box,
-                y: Math.floor(Math.random() * 19 + 1) * box
-            };
+            food = getRandomFoodPosition();
         } else {
-            // remove the tail
             snake.pop();
         }
 
@@ -77,19 +93,19 @@ function startSnakeGame(canvas, onGameOver) {
             y: snakeY
         };
 
-        // game over
         if (snakeX < 0 || snakeY < 0 || snakeX >= canvas.width || snakeY >= canvas.height || collision(newHead, snake)) {
             clearInterval(game);
-            document.removeEventListener("keydown", direction);
-            onGameOver();
+            document.removeEventListener("keydown", directionListener);
+            if(onGameOver) onGameOver();
+            return;
         }
 
         snake.unshift(newHead);
 
         ctx.fillStyle = "white";
-        ctx.font = "20px Changa one";
+        ctx.font = "20px 'Changa one', sans-serif";
         ctx.fillText("Score: " + score, box, 1.6 * box);
     }
 
-    let game = setInterval(draw, 100);
+    game = setInterval(draw, 100);
 }
