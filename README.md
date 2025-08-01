@@ -7,14 +7,18 @@ This is where the magic happens for my corner of the web. Dive in, explore, or j
 ## ✨ Features
 
 *   Interactive terminal simulation 🖥️
-*   Custom styling ✨
-*   Lightweight and fast ⚡
+*   Dark mode toggle 🌙/☀️
+*   CSS animations (typing effect, fade-ins) ✨
+*   Built with Tailwind CSS for rapid UI development
+*   Responsive design for mobile and desktop
+*   Analytics with Inspectlet
 
 ## 🛠️ Tech Stack
 
-*   **Frontend:** HTML, CSS, Vanilla JavaScript
-*   **Backend:** N/A (Static Site)
-*   **Deployment:** Github Pages (FREE!)
+*   **Frontend:** HTML, Tailwind CSS, Vanilla JavaScript
+*   **Icons:** Font Awesome
+*   **Analytics:** Inspectlet
+*   **Deployment:** GitHub Pages (FREE!)
 
 ## 🏃‍♂️ Running Locally
 
@@ -36,4 +40,4 @@ Want to take it for a spin?
 
 ---
 
-Happy coding! 🎉 
+Happy coding! 🎉
