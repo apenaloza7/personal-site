@@ -378,11 +378,13 @@ body.workstation-body {
 
 @media (max-width: 768px) {
     body.workstation-body {
-        overflow: auto; /* Allow body scroll on mobile */
+        height: auto;
+        overflow-y: auto; /* Allow body scroll on mobile */
     }
     .workstation-grid {
         grid-template-columns: 1fr;
         height: auto;
+        overflow: visible;
     }
     .panel {
         min-height: 250px; /* Give panels some minimum height */
