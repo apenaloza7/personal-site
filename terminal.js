@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const terminalOutput = document.getElementById('terminal-output');
     const terminalInput = document.getElementById('terminal-input');
     const terminal = document.getElementById('terminal');
+    const snakeCanvas = document.getElementById('snake-canvas');
     const prompt = 'user@pena-site:~$';
     const commandHistory = [];
     let historyIndex = -1;
@@ -96,6 +97,33 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'whoami':
                 outputLine.textContent = 'guest_user (Tell me your name!)';
                 break;
+            case 'snake':
+                terminal.classList.add('hidden');
+                snakeCanvas.classList.remove('hidden');
+                snakeCanvas.focus();
+
+                if (typeof startSnakeGame === 'function') {
+                    startSnakeGame(snakeCanvas, () => {
+                        // This callback is executed when the game ends
+                        snakeCanvas.classList.add('hidden');
+                        terminal.classList.remove('hidden');
+                        
+                        const gameOverLine = document.createElement('div');
+                        gameOverLine.classList.add('output');
+                        gameOverLine.textContent = "Game over! Type 'snake' to play again.";
+                        terminalOutput.appendChild(gameOverLine);
+
+                        terminal.scrollTop = terminal.scrollHeight;
+                        terminalInput.focus();
+                    });
+                } else {
+                    const errorLine = document.createElement('div');
+                    errorLine.textContent = "Error: Snake game module not loaded.";
+                    terminalOutput.appendChild(errorLine);
+                    snakeCanvas.classList.add('hidden');
+                    terminal.classList.remove('hidden');
+                }
+                return; // Prevent default output
             default:
                 outputLine.textContent = `Command not found: ${escapeHtml(command)}. Type 'help' for available commands.`;
                 break;
@@ -116,4 +144,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial focus
     terminalInput.focus();
-}); 
+});
