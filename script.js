@@ -41,8 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const entries = await client.getEntries({
                 content_type: 'job',
-                include: 2, // Include linked roles
-                order: '-fields.startDate' // Assuming you have a startDate field
+                include: 2 // Include linked roles
             });
 
             panel.innerHTML = ''; // Clear loading state
