@@ -427,6 +427,38 @@ body.workstation-body {
     color: var(--accent-green);
 }
 
+/* --- Blog Post List (Homepage) --- */
+.blog-post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.blog-post-list li {
+    margin-bottom: 0.25rem;
+}
+
+.blog-post-list li a {
+    color: var(--secondary-text);
+    text-decoration: none;
+    display: block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.blog-post-list li a:hover {
+    background-color: var(--border-color);
+    color: var(--primary-text);
+}
+
+.blog-post-list li a::before {
+    content: "•";
+    color: var(--primary-text);
+    margin-right: 0.75rem;
+    font-weight: 700;
+}
+
 /* --- Blog Post Styles --- */
 #panel-blog-post {
     grid-column: 1 / -1; /* Span all columns */
