@@ -82,19 +82,10 @@
             </div>
         </div>
 
-        <div id="panel-terminal" class="panel">
-            <div class="panel-header">[3] SHELL &lt;GO&gt;</div>
+        <div id="panel-blog" class="panel">
+            <div class="panel-header">[3] BLOG &lt;GO&gt;</div>
             <div class="panel-content">
-                <div id="terminal" class="terminal-container">
-                    <div id="terminal-output">
-                        <div>Welcome to PenaTerm! Type 'help' for available commands.</div>
-                    </div>
-                    <div class="terminal-input-line">
-                        <span class="prompt">user@pena-site:~$</span>
-                        <input type="text" id="terminal-input" autocomplete="off">
-                    </div>
-                </div>
-                <canvas id="snake-canvas" class="hidden"></canvas>
+                <!-- This will be filled by JavaScript -->
             </div>
         </div>
 
@@ -133,8 +124,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+    <script src="contentful-client.js"></script>
     <script src="script.js"></script>
-    <script src="terminal.js" defer></script>
-    <script src="snake.js" defer></script>
 </body>
 </html>

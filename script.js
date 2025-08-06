@@ -1,16 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Contentful Setup --- //
-    const CONTENTFUL_SPACE_ID = 'uhcip1ivkuft';
-    const CONTENTFUL_ACCESS_TOKEN = 'eRQiXFljDH30a6B4AEZRpGiQczrIJxV5LVK-o_lG7tE';
-
-    const client = contentful.createClient({
-        space: CONTENTFUL_SPACE_ID,
-        accessToken: CONTENTFUL_ACCESS_TOKEN,
-    });
-    
-    window.contentfulClient = client;
-
     // --- Fetch and Render Functions --- //
 
     async function renderProfile() {
@@ -18,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!panel) return;
         panel.innerHTML = '<em>Loading...</em>'; // Loading state
         try {
-            const entries = await client.getEntries({ content_type: 'profile', limit: 1 });
+            const entries = await window.contentfulClient.getEntries({ content_type: 'profile', limit: 1 });
             if (entries.items.length > 0) {
                 const profile = entries.items[0].fields;
                 panel.innerHTML = `
@@ -39,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!panel) return;
         panel.innerHTML = '<em>Loading...</em>'; // Loading state
         try {
-            const entries = await client.getEntries({
+            const entries = await window.contentfulClient.getEntries({
                 content_type: 'job',
                 include: 2 // Include linked roles
             });
@@ -84,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!panel) return;
         panel.innerHTML = '<em>Loading...</em>'; // Loading state
         try {
-            const entries = await client.getEntries({ content_type: 'hobby', order: 'fields.name' });
+            const entries = await window.contentfulClient.getEntries({ content_type: 'hobby', order: 'fields.name' });
             panel.innerHTML = ''; // Clear loading state
             entries.items.forEach(item => {
                 const hobby = item.fields;
@@ -108,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!panel) return;
         panel.innerHTML = '<em>Loading...</em>';
         try {
-            const entries = await client.getEntries({ content_type: 'newsItem', order: '-sys.createdAt' });
+            const entries = await window.contentfulClient.getEntries({ content_type: 'newsItem', order: '-sys.createdAt' });
             panel.innerHTML = '';
             entries.items.forEach(item => {
                 const news = item.fields;
@@ -127,11 +116,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    async function renderBlogPosts() {
+        const panel = document.querySelector('#panel-blog .panel-content');
+        if (!panel) return;
+        panel.innerHTML = '<em>Loading...</em>';
+        try {
+            const entries = await window.contentfulClient.getEntries({
+                content_type: 'blog',
+                order: '-fields.publishDate'
+            });
+
+            if (entries.items.length > 0) {
+                panel.innerHTML = ''; // Clear loading
+                const postList = document.createElement('ul');
+                postList.className = 'blog-post-list';
+
+                entries.items.forEach(item => {
+                    const post = item.fields;
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<a href="blog.html?id=${item.sys.id}">${post.title || 'Untitled Post'}</a>`;
+                    postList.appendChild(listItem);
+                });
+
+                panel.appendChild(postList);
+            } else {
+                panel.innerHTML = '<em>No blog posts yet.</em>';
+            }
+        } catch (error) {
+            panel.innerHTML = '<em>Error loading blog posts.</em>';
+            console.error(error);
+        }
+    }
+
     function loadAllContent() {
         renderProfile();
         renderPortfolio();
         renderHobbies();
         renderNews();
+        renderBlogPosts();
     }
 
     // --- Live Clock Functionality --- //
@@ -202,16 +224,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const sign = newChange > 0 ? '+' : '';
             changeSpan.textContent = `${sign}${newChange.toFixed(2)}% ${arrow}`;
-        });
-    }
-
-    // --- Terminal Focus --- //
-    const terminalPanel = document.getElementById('panel-terminal');
-    const terminalInput = document.getElementById('terminal-input');
-
-    if (terminalPanel && terminalInput) {
-        terminalPanel.addEventListener('click', () => {
-            terminalInput.focus();
         });
     }
 
