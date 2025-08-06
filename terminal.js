@@ -20,24 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (event.key === 'Enter') {
                 const command = terminalInput.value.trim();
                 if (command) {
-                    // Add to history if it's not the same as the last command
                     if (commandHistory.length === 0 || commandHistory[commandHistory.length - 1] !== command) {
                         commandHistory.push(command);
                     }
-                    historyIndex = commandHistory.length; // Reset history index
+                    historyIndex = commandHistory.length;
 
-                    // Display command
                     const commandLine = document.createElement('div');
                     commandLine.innerHTML = `<span class="prompt">${prompt}</span> <span class="command">${escapeHtml(command)}</span>`;
                     terminalOutput.appendChild(commandLine);
 
-                    // Process command
                     processCommand(command);
 
-                    // Clear input
                     terminalInput.value = '';
-
-                    // Scroll to bottom
                     terminalOutput.scrollTop = terminalOutput.scrollHeight;
                 }
             } else if (event.key === 'ArrowUp') {
@@ -61,11 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function processCommand(command) {
+    async function processCommand(command) {
         const outputLine = document.createElement('div');
         outputLine.classList.add('output');
         const args = command.split(' ').filter(Boolean);
         const cmd = args[0]?.toLowerCase();
+        
+        // Ensure the client is available
+        if (!window.contentfulClient) {
+            outputLine.textContent = 'Error: Content service not available.';
+            terminalOutput.appendChild(outputLine);
+            return;
+        }
 
         switch (cmd) {
             case 'help':
@@ -79,18 +80,48 @@ document.addEventListener('DOMContentLoaded', () => {
                     whoami - Display current user`;
                 break;
             case 'profile':
-                outputLine.textContent = 'Alejandro Penaloza: Software Engineer @ The Hartford, based in Charlotte, NC. Specializing in Java & Gosu development, passionate about solving complex problems.';
+                try {
+                    const entries = await window.contentfulClient.getEntries({ content_type: 'profile', limit: 1 });
+                    if (entries.items.length > 0) {
+                        const p = entries.items[0].fields;
+                        outputLine.textContent = `${p.name}: ${p.title}, based in ${p.location}. ${p.description}`;
+                    } else {
+                        outputLine.textContent = 'Profile data not found.';
+                    }
+                } catch (e) {
+                    outputLine.textContent = 'Error fetching profile data.';
+                }
                 break;
             case 'portfolio':
-                 outputLine.innerHTML = `[THE-HARTFORD] (Jun 2021 - Present)<br>
-                    &nbsp;&nbsp;&nbsp;Software Engineer (Aug 2023 - Present)<br>
-                    &nbsp;&nbsp;&nbsp;Associate Software Engineer (Jun 2021 - Aug 2023)`;
-                 break;
+                try {
+                    const entries = await window.contentfulClient.getEntries({ content_type: 'job', include: 2, order: '-fields.startDate' });
+                    let portfolioHtml = '';
+                    entries.items.forEach(entry => {
+                        const job = entry.fields;
+                        portfolioHtml += `[${job.companyName}] (${job.employmentDateRange})<br>`;
+                        if (job.roles) {
+                            job.roles.forEach(role => {
+                                portfolioHtml += `&nbsp;&nbsp;&nbsp;${role.fields.jobTitle} (${role.fields.dateRange})<br>`;
+                            });
+                        }
+                    });
+                    outputLine.innerHTML = portfolioHtml || 'No portfolio data found.';
+                } catch (e) {
+                    outputLine.textContent = 'Error fetching portfolio data.';
+                }
+                break;
             case 'hobbies':
-                outputLine.innerHTML = `[PKBL] Pickleball - BULLISH ▲<br>
-                    [GOLF] Golf - BULLISH ▲<br>
-                    [RUN] Running - NEUTRAL ▶<br>
-                    [SOCR] Soccer - NEUTRAL ▶`;
+                try {
+                    const entries = await window.contentfulClient.getEntries({ content_type: 'hobby', order: 'fields.name' });
+                    let hobbiesHtml = '';
+                    entries.items.forEach(item => {
+                        const hobby = item.fields;
+                        hobbiesHtml += `[${hobby.ticker}] ${hobby.name} - ${hobby.performance}<br>`;
+                    });
+                    outputLine.innerHTML = hobbiesHtml || 'No hobbies found.';
+                } catch (e) {
+                    outputLine.textContent = 'Error fetching hobbies.';
+                }
                 break;
             case 'contact':
                 outputLine.innerHTML = `You can find me on:<br>
@@ -112,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (typeof startSnakeGame === 'function') {
                         startSnakeGame(snakeCanvas, () => {
-                            // Callback when game ends
                             snakeCanvas.classList.add('hidden');
                             terminalContainer.classList.remove('hidden');
                             
@@ -132,13 +162,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         terminalContainer.classList.remove('hidden');
                     }
                 }
-                return; // Prevent default output
+                return;
             default:
                 outputLine.textContent = `Command not found: ${escapeHtml(command)}. Type 'help' for available commands.`;
                 break;
         }
 
         terminalOutput.appendChild(outputLine);
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
     }
 
     function escapeHtml(unsafe) {
@@ -150,7 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/'/g, "&#039;");
     }
 
-    // Initial focus
     if (terminalInput) {
         terminalInput.focus();
     }
