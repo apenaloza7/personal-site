@@ -54,12 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 let rolesHtml = '';
                 if (job.roles) {
                     job.roles.forEach(role => {
-                        rolesHtml += `
+                        if (role && role.fields) {
+                            rolesHtml += `
                             <div class="asset-sub">
                                 <span class="asset-details">${role.fields.jobTitle || ''}</span>
                                 <span class="asset-status-sub">${role.fields.dateRange || ''}</span>
                             </div>
                         `;
+                        }
                     });
                 }
 
