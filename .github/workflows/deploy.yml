@@ -17,8 +17,8 @@ jobs:
 
       - name: Replace Contentful placeholders with secrets
         run: |
-          sed -i "s/YOUR_SPACE_ID_PLACEHOLDER/${{ secrets.CONTENTFUL_SPACE_ID }}/g" script.js
-          sed -i "s/YOUR_ACCESS_TOKEN_PLACEHOLDER/${{ secrets.CONTENTFUL_ACCESS_TOKEN }}/g" script.js
+          sed -i "s/YOUR_SPACE_ID_PLACEHOLDER/${{ secrets.CONTENTFUL_SPACE_ID }}/g" contentful-client.js
+          sed -i "s/YOUR_ACCESS_TOKEN_PLACEHOLDER/${{ secrets.CONTENTFUL_ACCESS_TOKEN }}/g" contentful-client.js
       
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v3
