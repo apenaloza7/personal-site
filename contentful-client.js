@@ -1,7 +1,7 @@
 function initializeContentfulClient() {
     // --- Contentful Setup --- //
-    const CONTENTFUL_SPACE_ID = 'YOUR_SPACE_ID_PLACEHOLDER';
-    const CONTENTFUL_ACCESS_TOKEN = 'YOUR_ACCESS_TOKEN_PLACEHOLDER';
+    const CONTENTFUL_SPACE_ID = 'uhcip1ivkuft';
+    const CONTENTFUL_ACCESS_TOKEN = 'eRQiXFljDH30a6B4AEZRpGiQczrIJxV5LVK-o_lG7tE';
 
     const client = contentful.createClient({
         space: CONTENTFUL_SPACE_ID,
