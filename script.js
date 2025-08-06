@@ -122,8 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         panel.innerHTML = '<em>Loading...</em>';
         try {
             const entries = await window.contentfulClient.getEntries({
-                content_type: 'blog',
-                
+                content_type: 'blog'
             });
 
             if (entries.items.length > 0) {
