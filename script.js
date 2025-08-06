@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    initializeContentfulClient();
 
     // --- Fetch and Render Functions --- //
 

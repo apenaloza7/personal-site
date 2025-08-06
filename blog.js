@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    initializeContentfulClient();
 
     async function fetchAndRenderPost() {
         const postContent = document.getElementById('blog-post-content');
