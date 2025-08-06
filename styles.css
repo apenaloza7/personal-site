@@ -462,8 +462,12 @@ body.workstation-body {
 /* --- Blog Post Styles --- */
 #panel-blog-post {
     grid-column: 1 / -1; /* Span all columns */
-    max-width: 900px; /* Max-width for readability */
-    margin: 0 auto; /* Center the panel */
+}
+
+#panel-blog-post .panel-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .post-full-title {
