@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const entries = await window.contentfulClient.getEntries({
                 content_type: 'blog',
-                order: '-fields.publishDate'
+                
             });
 
             if (entries.items.length > 0) {
