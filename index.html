@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Personal website of Alejandro Penaloza">
+
+    <!-- Begin Inspectlet Asynchronous Code -->
+    <script type="text/javascript">
+      (function () {
+        window.__insp = window.__insp || [];
+        __insp.push(["wid", 680298117]);
+        var ldinsp = function () {
+          if (typeof window.__inspld != "undefined") return;
+          window.__inspld = 1;
+          var insp = document.createElement("script");
+          insp.type = "text/javascript";
+          insp.async = true;
+          insp.id = "inspsync";
+          insp.src =
+            ("https:" == document.location.protocol ? "https" : "http") +
+            "://cdn.inspectlet.com/inspectlet.js?wid=680298117&r=" +
+            Math.floor(new Date().getTime() / 3600000);
+          var x = document.getElementsByTagName("script")[0];
+          x.parentNode.insertBefore(insp, x);
+        };
+        setTimeout(ldinsp, 0);
+      })();
+    </script>
+    <!-- End Inspectlet Asynchronous Code -->
+
+    <title>Pena Terminal</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body class="workstation-body">
+
+    <header class="workstation-header">
+        <div class="ticker">
+            <span>The Pena Index</span>
+            <span class="price-marker">
+                <span class="price">1,998.05</span>
+                <span class="change bullish">+24.06 (+1.22%)</span>
+            </span>
+        </div>
+        <div class="market-status">
+            <span class="status-item">STATUS: <span class="status-value up">ONLINE ▲</span></span>
+            <span class="status-item">LOCAL TIME: <span id="local-time" class="status-value"></span></span>
+        </div>
+        <div class="sliding-ticker-container">
+            <div class="sliding-ticker-content">
+                <div class="ticker-item"><span class="ticker-name">[PKBL] Pickleball</span><span class="ticker-change bullish">+1.50% ▲</span></div>
+                <div class="ticker-item"><span class="ticker-name">[GOLF] Golf</span><span class="ticker-change bullish">+2.10% ▲</span></div>
+                <div class="ticker-item"><span class="ticker-name">[RUN] Running</span><span class="ticker-change neutral">-0.25% ▶</span></div>
+                <div class="ticker-item"><span class="ticker-name">[SOCR] Soccer</span><span class="ticker-change neutral">+0.05% ▶</span></div>
+                <div class="ticker-item"><span class="ticker-name">[GOSU] Gosu</span><span class="ticker-change neutral">+0.05% ▶</span></div>
+                <div class="ticker-item"><span class="ticker-name">[JAVA] Java</span><span class="ticker-change neutral">+0.05% ▶</span></div>
+                <div class="ticker-item"><span class="ticker-name">[PYTH] Python</span><span class="ticker-change bullish">+5.08% ▲</span></div>
+                <div class="ticker-item"><span class="ticker-name">[REAC] React</span><span class="ticker-change neutral">+1.57% ▶</span></div>
+                <div class="ticker-item"><span class="ticker-name">[AI] GenAI</span><span class="ticker-change bullish">+3.92% ▲</span></div>
+                <div class="ticker-item"><span class="ticker-name">[OPS] Dev Ops</span><span class="ticker-change neutral">+0.05% ▶</span></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="workstation-grid">
+        <div id="panel-profile" class="panel">
+            <div class="panel-header">[1] ENGINEER_PROFILE &lt;GO&gt;</div>
+            <div class="panel-content">
+                <!-- This will be filled by JavaScript -->
+            </div>
+        </div>
+
+        <div id="panel-portfolio" class="panel">
+            <div class="panel-header">[2] PORTFOLIO &lt;GO&gt;</div>
+            <div class="panel-content">
+                <!-- This will be filled by JavaScript -->
+            </div>
+        </div>
+
+        <div id="panel-terminal" class="panel">
+            <div class="panel-header">[3] SHELL &lt;GO&gt;</div>
+            <div class="panel-content">
+                <div id="terminal" class="terminal-container">
+                    <div id="terminal-output">
+                        <div>Welcome to PenaTerm! Type 'help' for available commands.</div>
+                    </div>
+                    <div class="terminal-input-line">
+                        <span class="prompt">user@pena-site:~$</span>
+                        <input type="text" id="terminal-input" autocomplete="off">
+                    </div>
+                </div>
+                <canvas id="snake-canvas" class="hidden"></canvas>
+            </div>
+        </div>
+
+        <div id="panel-hobbies" class="panel">
+            <div class="panel-header">[4] PERSONAL HOLDINGS &lt;GO&gt;</div>
+            <div class="panel-content">
+                <!-- This will be filled by JavaScript -->
+            </div>
+        </div>
+        
+        <div id="panel-contact" class="panel">
+            <div class="panel-header">[5] MSG &lt;GO&gt;</div>
+            <div class="panel-content">
+                <a href="https://github.com/apenaloza7" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <i class="fab fa-github"></i> GITHUB
+                </a>
+                <a href="https://www.linkedin.com/in/penalozaalejandro/" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <i class="fab fa-linkedin"></i> LINKEDIN
+                </a>
+                <a href="https://www.youtube.com/@penapoppin" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <i class="fab fa-youtube"></i> YOUTUBE
+                </a>
+            </div>
+        </div>
+
+        <div id="panel-news" class="panel">
+            <div class="panel-header">[6] NEWS & INSIGHTS &lt;GO&gt;</div>
+            <div class="panel-content">
+                <!-- This will be filled by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="workstation-footer">
+        &copy; 2025 Alejandro Penaloza | Built with love (and <a href="https://www.cursor.com/" target="_blank" rel="noopener noreferrer">Cursor</a>) <span class="footer-icon">💻</span>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+    <script src="script.js"></script>
+    <script src="terminal.js" defer></script>
+    <script src="snake.js" defer></script>
+</body>
+</html>
