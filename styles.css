@@ -427,6 +427,79 @@ body.workstation-body {
     color: var(--accent-green);
 }
 
+/* --- Blog Post Styles --- */
+#panel-blog-post {
+    grid-column: 1 / -1; /* Span all columns */
+    max-width: 900px; /* Max-width for readability */
+    margin: 0 auto; /* Center the panel */
+}
+
+.post-full-title {
+    font-size: 2.5rem;
+    color: var(--primary-text);
+    margin-bottom: 0.5rem;
+}
+
+.post-full-meta {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.post-full-body p {
+    margin-bottom: 1.5rem;
+    color: #cccccc; /* Slightly lighter than pure white for easier reading */
+}
+
+.post-full-body ul, .post-full-body ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+
+.post-full-body li {
+    margin-bottom: 0.75rem;
+    color: #cccccc;
+}
+
+.post-full-body ul li::marker {
+    color: var(--primary-text);
+    content: "•  ";
+}
+
+.post-full-body ol {
+    list-style: none;
+    counter-reset: item;
+}
+
+.post-full-body ol li::before {
+    counter-increment: item;
+    content: counter(item) ". ";
+    color: var(--primary-text);
+    font-weight: 700;
+    margin-right: 0.5rem;
+}
+
+.post-full-body a {
+    color: var(--secondary-text);
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.post-full-body a:hover {
+    color: var(--primary-text);
+}
+
+.back-link {
+    color: var(--secondary-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--primary-text);
+}
+
 /* --- Responsive Layout --- */
 @media (max-width: 1024px) {
     .workstation-grid {
@@ -464,5 +537,9 @@ body.workstation-body {
         flex-basis: 100%;
         justify-content: center;
         gap: 1rem;
+    }
+
+    .post-full-title {
+        font-size: 2rem;
     }
 }
