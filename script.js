@@ -123,21 +123,28 @@ document.addEventListener('DOMContentLoaded', () => {
         panel.innerHTML = '<em>Loading...</em>';
         try {
             const entries = await window.contentfulClient.getEntries({
-                content_type: 'blog'
+                content_type: 'blog',
+                order: '-fields.publishDate' // Order by publish date, most recent first
             });
-
+    
             if (entries.items.length > 0) {
                 panel.innerHTML = ''; // Clear loading
                 const postList = document.createElement('ul');
                 postList.className = 'blog-post-list';
-
+    
                 entries.items.forEach(item => {
                     const post = item.fields;
                     const listItem = document.createElement('li');
-                    listItem.innerHTML = `<a href="blog.html?id=${item.sys.id}">${post.title || 'Untitled Post'}</a>`;
+                    
+                    // Create the link element
+                    const link = document.createElement('a');
+                    link.href = `blog.html?id=${item.sys.id}`;
+                    link.textContent = post.title || 'Untitled Post';
+                    
+                    listItem.appendChild(link);
                     postList.appendChild(listItem);
                 });
-
+    
                 panel.appendChild(postList);
             } else {
                 panel.innerHTML = '<em>No blog posts yet.</em>';
@@ -147,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(error);
         }
     }
-
+    
     function loadAllContent() {
         renderProfile();
         renderPortfolio();
