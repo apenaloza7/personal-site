@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.title = post.title || 'Blog Post'; 
 
                 const publishDate = post.publishDate ? new Date(post.publishDate).toLocaleDateString() : 'Date not available';
-                const bodyHtml = post.postBody ? window.richTextHtmlRenderer.documentToHtmlString(post.postBody) : '<p>This post has no content.</p>';
+                const bodyHtml = post.postBody ? documentToHtmlString(post.postBody) : '<p>This post has no content.</p>';
 
                 postContent.innerHTML = `
                     <h1 class="post-full-title">${post.title || 'Untitled Post'}</h1>
