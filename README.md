@@ -55,6 +55,99 @@ personal-site/
 └── README.md               # This file
 ```
 
+## 🏗️ Architecture & Data Flow
+
+The following diagram illustrates how the website components interact and how content flows from Contentful CMS to the user interface:
+
+```mermaid
+graph TD
+    A[User visits penaloza.dev] --> B[index.html]
+    A --> C[blog.html?id=postId]
+    
+    B --> D[script.js]
+    C --> E[blog.js]
+    
+    D --> F[contentful-client.js]
+    E --> F
+    
+    F --> G[Contentful CMS]
+    
+    G --> H[Profile Content]
+    G --> I[Portfolio/Jobs]
+    G --> J[Blog Posts]
+    G --> K[Roles Data]
+    
+    H --> L[Panel 1: Engineer Profile]
+    I --> M[Panel 2: Portfolio]
+    J --> N[Panel 3: Blog Preview]
+    K --> M
+    J --> O[Individual Blog Post]
+    
+    B --> P[styles.css]
+    C --> P
+    
+    P --> Q[Terminal/Workstation Theme]
+    P --> R[Stock Market Ticker UI]
+    P --> S[Responsive Design]
+    
+    T[Developer Push] --> U[GitHub Actions]
+    U --> V[Replace Contentful Secrets]
+    V --> W[Deploy to gh-pages]
+    W --> X[GitHub Pages]
+    X --> A
+    
+    Y[IBM Plex Mono] --> P
+    Z[Font Awesome] --> P
+    AA[Inspectlet Analytics] --> B
+    
+    subgraph "Frontend Files"
+        B
+        C
+        D
+        E
+        F
+        P
+    end
+    
+    subgraph "Content Management"
+        G
+        H
+        I
+        J
+        K
+    end
+    
+    subgraph "UI Components"
+        L
+        M
+        N
+        O
+        Q
+        R
+        S
+    end
+    
+    subgraph "Deployment Pipeline"
+        T
+        U
+        V
+        W
+        X
+    end
+    
+    subgraph "External Services"
+        Y
+        Z
+        AA
+    end
+    
+    style A fill:#e1f5fe
+    style G fill:#f3e5f5
+    style U fill:#e8f5e8
+    style B fill:#fff3e0
+    style C fill:#fff3e0
+```
+
 ## 🏃‍♂️ Running Locally
 
 ### Quick Start
