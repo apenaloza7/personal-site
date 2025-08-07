@@ -22,28 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.title = post.title || 'Blog Post'; 
 
                 const publishDate = post.publishDate ? new Date(post.publishDate).toLocaleDateString() : 'Date not available';
-                // Use the rich text renderer with fallback
-                let bodyHtml = '<p>This post has no content.</p>';
-                
-                if (post.postBody) {
-                    try {
-                        // Try different ways the rich text renderer might be exposed
-                        if (window.richTextHtmlRenderer?.documentToHtmlString) {
-                            bodyHtml = window.richTextHtmlRenderer.documentToHtmlString(post.postBody);
-                        } else if (window.documentToHtmlString) {
-                            bodyHtml = window.documentToHtmlString(post.postBody);
-                        } else if (window.contentfulRichTextHtmlRenderer?.documentToHtmlString) {
-                            bodyHtml = window.contentfulRichTextHtmlRenderer.documentToHtmlString(post.postBody);
-                        } else {
-                            // Fallback: just display the raw rich text structure
-                            console.warn('Rich text renderer not found, using fallback');
-                            bodyHtml = '<p>Rich text content (renderer not available)</p>';
-                        }
-                    } catch (error) {
-                        console.error('Error rendering rich text:', error);
-                        bodyHtml = '<p>Error rendering content</p>';
-                    }
-                }
+                // Use the rich text renderer - it's exposed globally as documentToHtmlString
+                const bodyHtml = post.postBody ? documentToHtmlString(post.postBody) : '<p>This post has no content.</p>';
 
                 postContent.innerHTML = `
                     <h1 class="post-full-title">${post.title || 'Untitled Post'}</h1>
