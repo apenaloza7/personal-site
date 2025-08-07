@@ -30,10 +30,22 @@
     <script>
         var exports = {}; // quick fix because 'exports' is not defined in rich-text bundle below
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@contentful/rich-text-html-renderer@16.1.0/dist/rich-text-html-renderer.es5.min.js"></script>
+    <script src="https://unpkg.com/@contentful/rich-text-html-renderer@16.1.0/dist/rich-text-html-renderer.umd.js"></script>
     <script>
-        // Make the rich text renderer available globally
-        window.richTextHtmlRenderer = window.contentfulRichTextHtmlRenderer;
+        // Debug: Check what's actually available after loading the library
+        console.log('Available globals after rich-text load:', Object.keys(window).filter(key => 
+            key.toLowerCase().includes('contentful') || 
+            key.toLowerCase().includes('rich') || 
+            key.toLowerCase().includes('document') ||
+            key.toLowerCase().includes('html')
+        ));
+        
+        // The UMD version should expose the library differently
+        if (window.RichTextHtmlRenderer) {
+            window.richTextHtmlRenderer = window.RichTextHtmlRenderer;
+        } else if (window.contentfulRichTextHtmlRenderer) {
+            window.richTextHtmlRenderer = window.contentfulRichTextHtmlRenderer;
+        }
     </script>
      <script src="contentful-client.js"></script>
      <script src="blog.js"></script>
