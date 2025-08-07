@@ -462,6 +462,14 @@ body.workstation-body {
 /* --- Blog Post Styles --- */
 #panel-blog-post {
     grid-column: 1 / -1; /* Span all columns */
+    grid-row: 1 / -1; /* Span all rows to fill full height */
+    max-width: none; /* Override any max-width */
+}
+
+#panel-blog-post .panel-content {
+    padding: 2rem; /* Add some padding */
+    flex-grow: 1; /* Fill remaining space after header */
+    overflow-y: auto; /* Allow scrolling if content is too long */
 }
 
 #panel-blog-post .panel-header {
@@ -524,6 +532,65 @@ body.workstation-body {
 
 .post-full-body a:hover {
     color: var(--primary-text);
+}
+
+/* Additional blog post typography */
+.post-full-body h1,
+.post-full-body h2,
+.post-full-body h3,
+.post-full-body h4,
+.post-full-body h5,
+.post-full-body h6 {
+    color: var(--primary-text);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.post-full-body h1 {
+    font-size: 2rem;
+    border-bottom: 1px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+.post-full-body h2 {
+    font-size: 1.5rem;
+}
+
+.post-full-body h3 {
+    font-size: 1.25rem;
+}
+
+.post-full-body code {
+    background-color: #1a1a1a;
+    color: var(--accent-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85em;
+}
+
+.post-full-body pre {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.post-full-body pre code {
+    background: none;
+    padding: 0;
+    color: #cccccc;
+}
+
+.post-full-body blockquote {
+    border-left: 3px solid var(--accent-color);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: #aaa;
 }
 
 .back-link {

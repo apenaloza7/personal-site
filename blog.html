@@ -31,6 +31,10 @@
         var exports = {}; // quick fix because 'exports' is not defined in rich-text bundle below
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@contentful/rich-text-html-renderer@16.1.0/dist/rich-text-html-renderer.es5.min.js"></script>
+    <script>
+        // Make the rich text renderer available globally
+        window.richTextHtmlRenderer = window.contentfulRichTextHtmlRenderer;
+    </script>
      <script src="contentful-client.js"></script>
      <script src="blog.js"></script>
  </body>
