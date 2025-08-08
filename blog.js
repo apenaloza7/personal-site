@@ -93,10 +93,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 return a;
             }
             case 'text': {
-                let current = document.createTextNode(node.value || '');
+                const value = typeof node.value === 'string' ? node.value : '';
                 const marks = Array.isArray(node.marks) ? node.marks : [];
+
+                const hasCode = marks.some((m) => m.type === 'code');
+                if (hasCode) {
+                    // For multiline code, render as <pre><code>
+                    if (value.includes('\n')) {
+                        const pre = document.createElement('pre');
+                        const code = document.createElement('code');
+                        code.textContent = value;
+                        pre.appendChild(code);
+                        return pre;
+                    }
+                    const code = document.createElement('code');
+                    code.textContent = value;
+                    return code;
+                }
+
+                // Build text node(s) with <br> for hard line breaks
+                let contentNode;
+                if (value.includes('\n')) {
+                    const frag = document.createDocumentFragment();
+                    const parts = value.split('\n');
+                    parts.forEach((part, idx) => {
+                        frag.appendChild(document.createTextNode(part));
+                        if (idx < parts.length - 1) frag.appendChild(document.createElement('br'));
+                    });
+                    contentNode = frag;
+                } else {
+                    contentNode = document.createTextNode(value);
+                }
+
+                // Apply non-code marks as wrappers
+                let current = contentNode;
                 for (const mark of marks) {
-                    let wrapper;
+                    if (mark.type === 'code') continue;
+                    let wrapper = null;
                     switch (mark.type) {
                         case 'bold':
                             wrapper = document.createElement('strong');
@@ -106,9 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             break;
                         case 'underline':
                             wrapper = document.createElement('u');
-                            break;
-                        case 'code':
-                            wrapper = document.createElement('code');
                             break;
                         default:
                             wrapper = null;
