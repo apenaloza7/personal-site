@@ -7,6 +7,7 @@
     --accent-red: #FF4D4D; /* Market Red */
     --border-color: #3a3a3a;
     --font-family: 'IBM Plex Mono', monospace;
+    --accent-color: #F3D434; /* used by blog elements */
 }
 
 * {
