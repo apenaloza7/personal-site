@@ -85,82 +85,126 @@ graph TD
     D --> F[js/utils/contentful-client.js]
     E --> F
     
-    F --> G[Contentful CMS]
+    D --> F1[js/panels/profile-panel.js]
+    D --> F2[js/panels/portfolio-panel.js]
+    D --> F3[js/panels/blog-panel.js]
+    D --> F4[js/panels/hobbies-panel.js]
+    D --> F5[js/panels/news-panel.js]
     
-    G --> H[Profile Content]
-    G --> I[Portfolio/Jobs]
-    G --> J[Blog Posts]
-    G --> K[Roles Data]
+    F1 --> G1[js/utils/contentful-utils.js]
+    F2 --> G1
+    F3 --> G1
+    F4 --> G1
+    F5 --> G1
     
-    H --> L[Panel 1: Engineer Profile]
-    I --> M[Panel 2: Portfolio]
-    J --> N[Panel 3: Blog Preview]
-    K --> M
-    J --> O[Individual Blog Post]
+    G1 --> G2[js/utils/ui-utils.js]
+    G1 --> G3[js/utils/dom-utils.js]
     
-    B --> P[styles.css]
-    C --> P
+    D --> H1[js/features/live-clock.js]
+    D --> H2[js/features/ticker-simulation.js]
     
-    P --> Q[Terminal/Workstation Theme]
-    P --> R[Stock Market Ticker UI]
-    P --> S[Responsive Design]
+    F --> I[Contentful CMS]
+    G1 --> I
     
-    T[Developer Push] --> U[GitHub Actions]
-    U --> V[Replace Contentful Secrets]
-    V --> W[Deploy to gh-pages]
-    W --> X[GitHub Pages]
-    X --> A
+    I --> J1[Profile Content]
+    I --> J2[Portfolio/Jobs Data]
+    I --> J3[Blog Posts]
+    I --> J4[Roles Data]
+    I --> J5[Hobbies Data]
+    I --> J6[News Items]
     
-    Y[IBM Plex Mono] --> P
-    Z[Font Awesome] --> P
-    AA[Inspectlet Analytics] --> B
+    J1 --> K1[Panel 1: Engineer Profile]
+    J2 --> K2[Panel 2: Portfolio]
+    J4 --> K2
+    J3 --> K3[Panel 3: Blog Preview]
+    J5 --> K4[Panel 4: Personal Holdings]
+    J6 --> K6[Panel 6: News & Insights]
+    K5[Panel 5: MSG/Contact] --> B
+    J3 --> L[Individual Blog Post Page]
     
-    subgraph "Frontend Files"
+    B --> M[styles.css]
+    C --> M
+    
+    M --> N1[Terminal/Workstation Theme]
+    M --> N2[Stock Market Ticker UI]
+    M --> N3[Responsive Design]
+    
+    O[Developer Push] --> P[GitHub Actions Workflow]
+    P --> Q[Replace Contentful Secrets]
+    Q --> R[Deploy to gh-pages]
+    R --> S[GitHub Pages]
+    S --> A
+    
+    T1[IBM Plex Mono] --> M
+    T2[Font Awesome] --> M
+    T3[Inspectlet Analytics] --> B
+    T4[Contentful SDK] --> F
+    
+    subgraph "Core Application"
         B
         C
         D
         E
+        M
+    end
+    
+    subgraph "Panel Components"
+        F1
+        F2
+        F3
+        F4
+        F5
+        K1
+        K2
+        K3
+        K4
+        K5
+        K6
+    end
+    
+    subgraph "Utility Modules"
         F
-        P
+        G1
+        G2
+        G3
+    end
+    
+    subgraph "Interactive Features"
+        H1
+        H2
     end
     
     subgraph "Content Management"
-        G
-        H
         I
-        J
-        K
+        J1
+        J2
+        J3
+        J4
+        J5
+        J6
     end
     
-    subgraph "UI Components"
-        L
-        M
-        N
+    subgraph "Deployment Pipeline"
         O
+        P
         Q
         R
         S
     end
     
-    subgraph "Deployment Pipeline"
-        T
-        U
-        V
-        W
-        X
-    end
-    
-    subgraph "External Services"
-        Y
-        Z
-        AA
+    subgraph "External Dependencies"
+        T1
+        T2
+        T3
+        T4
     end
     
     style A fill:#e1f5fe
-    style G fill:#f3e5f5
-    style U fill:#e8f5e8
+    style I fill:#f3e5f5
+    style P fill:#e8f5e8
     style B fill:#fff3e0
     style C fill:#fff3e0
+    style D fill:#ffebcd
 ```
 
 ## 🏃‍♂️ Running Locally
@@ -193,6 +237,8 @@ To enable dynamic content loading:
     - `job` - For work experience  
     - `role` - For specific job roles
     - `blogPost` - For blog entries
+    - `hobby` - For personal interests and hobbies
+    - `newsItem` - For news and insights content
 
 ## 🚀 Deployment
 
