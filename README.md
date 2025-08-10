@@ -42,13 +42,28 @@ A terminal/workstation-themed personal website featuring a unique stock market t
 ```
 personal-site/
 ├── index.html              # Main landing page
-├── blog.html               # Blog post template page
 ├── styles.css              # Main stylesheet
-├── script.js               # Main JavaScript functionality
-├── blog.js                 # Blog-specific JavaScript
-├── contentful-client.js    # Contentful CMS client setup
 ├── favicon.ico             # Site favicon
 ├── CNAME                   # Custom domain configuration
+├── pages/                  # Secondary HTML pages
+│   └── blog.html          # Blog post template page
+├── js/                     # Modular JavaScript architecture
+│   ├── main.js            # Main application coordination
+│   ├── blog.js            # Blog-specific JavaScript
+│   ├── utils/             # Shared utility functions
+│   │   ├── contentful-client.js # Contentful CMS client setup
+│   │   ├── contentful-utils.js  # Contentful API utilities
+│   │   ├── dom-utils.js         # DOM manipulation utilities
+│   │   └── ui-utils.js          # UI state management utilities
+│   ├── panels/            # Content panel modules
+│   │   ├── profile-panel.js    # Profile rendering logic
+│   │   ├── portfolio-panel.js  # Portfolio/jobs rendering logic
+│   │   ├── hobbies-panel.js    # Hobbies rendering logic
+│   │   ├── news-panel.js       # News rendering logic
+│   │   └── blog-panel.js       # Blog posts rendering logic
+│   └── features/          # Interactive feature modules
+│       ├── live-clock.js       # Real-time clock functionality
+│       └── ticker-simulation.js # Stock ticker simulation
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml      # GitHub Actions deployment workflow
@@ -62,12 +77,12 @@ The following diagram illustrates how the website components interact and how co
 ```mermaid
 graph TD
     A[User visits penaloza.dev] --> B[index.html]
-    A --> C[blog.html?id=postId]
+    A --> C[pages/blog.html?id=postId]
     
-    B --> D[script.js]
-    C --> E[blog.js]
+    B --> D[js/main.js]
+    C --> E[js/blog.js]
     
-    D --> F[contentful-client.js]
+    D --> F[js/utils/contentful-client.js]
     E --> F
     
     F --> G[Contentful CMS]
