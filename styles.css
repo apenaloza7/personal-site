@@ -91,6 +91,57 @@ body.workstation-body {
 .market-status {
     display: flex;
     gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.code-input-container {
+    display: flex;
+    align-items: center;
+    background-color: #1a1a1a;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    height: 1.8rem;
+    overflow: hidden;
+}
+
+.code-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--accent-green);
+    padding: 0 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.code-toggle-btn:hover {
+    color: var(--primary-text);
+}
+
+.code-input {
+    background: none;
+    border: none;
+    border-left: 1px solid var(--border-color);
+    color: var(--primary-text);
+    font-family: var(--font-family);
+    font-size: 0.85rem;
+    width: 0;
+    padding: 0;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+    outline: none;
+    height: 100%;
+}
+
+.code-input-container.expanded .code-input {
+    width: 150px;
+    padding: 0 0.5rem;
+    opacity: 1;
 }
 
 .status-item {
