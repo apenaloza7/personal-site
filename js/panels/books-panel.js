@@ -31,7 +31,7 @@ const createBookItem = (book) => {
     // Handle image
     const imageUrl = book.coverImage?.fields?.file?.url 
         ? `https:${book.coverImage.fields.file.url}` 
-        : 'assets/placeholder-book.png' // Fallback if needed
+        : 'assets/placeholder_book.png' // Fallback if needed
 
     // Create container
     const container = createElement('div', 'book-item')
