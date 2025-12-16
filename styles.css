@@ -287,12 +287,12 @@ body.workstation-body {
     grid-column: 1 / 3; /* Span two columns */
 }
 
-#panel-portfolio .asset-ticker, .hobby-asset .asset-ticker {
+#panel-portfolio .asset-ticker {
     color: var(--accent-red);
     font-weight: 700;
 }
 
-#panel-portfolio .asset-name, .hobby-asset .asset-name {
+#panel-portfolio .asset-name {
     color: var(--primary-text);
 }
 
@@ -310,24 +310,36 @@ body.workstation-body {
     font-size: 0.85rem;
 }
 
-#panel-hobbies .hobby-asset {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    align-items: center;
-    margin-bottom: 1rem;
+/* --- Project List (Projects Panel) --- */
+.project-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-#panel-hobbies .asset-performance {
-    text-align: right;
-    font-weight: 700;
+.project-list li {
+    margin-bottom: 0.25rem;
 }
 
-#panel-hobbies .asset-performance.bullish {
-    color: var(--accent-green);
+.project-list li a {
+    color: var(--secondary-text);
+    text-decoration: none;
+    display: block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-#panel-hobbies .asset-performance.neutral {
+.project-list li a:hover {
+    background-color: var(--border-color);
     color: var(--primary-text);
+}
+
+.project-list li a::before {
+    content: "•";
+    color: var(--primary-text);
+    margin-right: 0.75rem;
+    font-weight: 700;
 }
 
 #panel-contact .contact-link {
