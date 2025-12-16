@@ -4,7 +4,7 @@
 
 import { renderProfile } from './panels/profile-panel.js'
 import { renderPortfolio } from './panels/portfolio-panel.js'
-import { renderHobbies } from './panels/hobbies-panel.js'
+import { renderProjects } from './panels/projects-panel.js'
 import { renderNews } from './panels/news-panel.js'
 import { renderBlogPosts } from './panels/blog-panel.js'
 import { initializeClock } from './features/live-clock.js'
@@ -18,7 +18,7 @@ import { initializeCodeInput } from './features/code-input.js'
 function loadAllContent() {
 	renderProfile()
 	renderPortfolio()
-	renderHobbies()
+	renderProjects()
 	renderNews()
 	renderBlogPosts()
 }
