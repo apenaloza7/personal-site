@@ -5,7 +5,7 @@
 import { renderProfile } from './panels/profile-panel.js'
 import { renderPortfolio } from './panels/portfolio-panel.js'
 import { renderProjects } from './panels/projects-panel.js'
-import { renderNews } from './panels/news-panel.js'
+import { renderBooks } from './panels/books-panel.js'
 import { renderBlogPosts } from './panels/blog-panel.js'
 import { initializeClock } from './features/live-clock.js'
 import { initializeTicker } from './features/ticker-simulation.js'
@@ -19,7 +19,7 @@ function loadAllContent() {
 	renderProfile()
 	renderPortfolio()
 	renderProjects()
-	renderNews()
+	renderBooks()
 	renderBlogPosts()
 }
 
