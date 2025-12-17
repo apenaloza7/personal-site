@@ -454,6 +454,11 @@ body.workstation-body {
     border-color: var(--primary-text);
 }
 
+.book-status-badge.unread {
+    color: var(--accent-red);
+    border-color: var(--accent-red);
+}
+
 .book-status-badge.tbr {
     color: #a0a0a0;
     border-color: #a0a0a0;
