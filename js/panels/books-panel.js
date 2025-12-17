@@ -22,21 +22,21 @@ const createBookItem = (book) => {
         if (status.includes('reading')) {
             statusClass = 'reading'
             statusLabel = 'READING'
-        } else if (status.includes('read')) {
-            statusClass = 'read'
-            statusLabel = 'READ'
         } else if (status.includes('unread')) {
             statusClass = 'unread'
             statusLabel = 'NOT READ'
+        } else if (status.includes('read')) {
+            statusClass = 'read'
+            statusLabel = 'READ'
         }
     }
 
-    // Handle image
+
     const imageUrl = book.coverImage?.fields?.file?.url 
         ? `https:${book.coverImage.fields.file.url}` 
         : 'assets/placeholder_book.png' // Fallback if needed
 
-    // Create container
+
     const container = createElement('div', 'book-item')
     
     container.innerHTML = `
