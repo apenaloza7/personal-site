@@ -14,8 +14,8 @@ import { createElement } from '../utils/dom-utils.js'
  */
 const createBookItem = (book) => {
     // Determine status class
-    let statusClass = 'tbr'
-    let statusLabel = 'TBR'
+    let statusClass = 'unread'
+    let statusLabel = 'NOT READ'
     
     if (book.status) {
         const status = book.status.toLowerCase()
