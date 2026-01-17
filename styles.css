@@ -181,7 +181,6 @@ body.workstation-body {
 
 /* --- Info Bar Styles (Weather + Marquee) --- */
 .info-bar {
-    flex-basis: 100%;
     display: flex;
     align-items: center;
     background-color: #0c0c0c;
@@ -189,8 +188,7 @@ body.workstation-body {
     margin-top: 0.5rem;
     margin-left: -1rem; /* Extend to edge of header */
     margin-right: -1rem; /* Extend to edge of header */
-    padding-left: 1rem;
-    padding-right: 1rem;
+    width: calc(100% + 2rem); /* Compensate for negative margins */
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
     gap: 1.5rem;
