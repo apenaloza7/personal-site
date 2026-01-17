@@ -8,7 +8,8 @@ import { renderProjects } from './panels/projects-panel.js'
 import { renderBooks } from './panels/books-panel.js'
 import { renderBlogPosts } from './panels/blog-panel.js'
 import { initializeClock } from './features/live-clock.js'
-import { initializeTicker } from './features/ticker-simulation.js'
+import { initializeWeather } from './features/weather.js'
+import { initializeMarquee } from './features/marquee.js'
 import { initializeCodeInput } from './features/code-input.js'
 
 /**
@@ -31,7 +32,8 @@ function initializeApp() {
 	// Initialize interactive features (independent of content)
 	try {
 		initializeClock()
-		initializeTicker()
+		initializeWeather()
+		initializeMarquee()
 		initializeCodeInput()
 	} catch (error) {
 		console.error('Error initializing interactive features:', error)
