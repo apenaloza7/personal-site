@@ -797,6 +797,38 @@ body.workstation-body {
     color: var(--primary-text);
 }
 
+/* Blog page specific styles */
+.blog-header {
+    justify-content: space-between;
+}
+
+.blog-header .ticker {
+    flex-basis: auto;
+}
+
+.blog-header .market-status {
+    flex-basis: auto;
+}
+
+.back-link-header {
+    color: var(--secondary-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding: 0.5rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.back-link-header:hover {
+    color: var(--primary-text);
+}
+
+.blog-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
 /* --- Responsive Layout --- */
 @media (max-width: 1024px) {
     .workstation-grid {
@@ -840,12 +872,167 @@ body.workstation-body {
         font-size: 2rem;
     }
 
+    /* Portfolio panel - stacked layout on mobile */
+    #panel-portfolio .asset-main {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    #panel-portfolio .asset-sub {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 1rem;
+        gap: 0.25rem;
+    }
+
+    #panel-portfolio .asset-status,
+    #panel-portfolio .asset-status-sub {
+        text-align: left;
+    }
+
     /* Bookshelf adjustments for mobile */
     #panel-books .panel-content {
         padding: 0.75rem;
+        touch-action: pan-x pan-y; /* Allow both scroll directions but prevent conflicts */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     }
     
     .book-item {
         width: 100px; /* Slightly smaller on mobile */
+    }
+
+    /* Increase touch targets for mobile */
+    #panel-contact .contact-link {
+        padding: 0.75rem;
+        min-height: 44px;
+    }
+
+    .project-list li a,
+    .blog-post-list li a {
+        padding: 0.5rem 0.75rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    .code-toggle-btn {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 0 0.75rem;
+    }
+
+    /* Info bar - allow stacking on narrow screens */
+    .info-bar {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .weather-container {
+        flex-shrink: 1;
+        min-width: 0;
+        border-right: none;
+        padding-right: 0;
+    }
+
+    .marquee-container {
+        flex-basis: 100%;
+        order: 1;
+    }
+
+    /* Code input smaller on mobile */
+    .code-input-container.expanded .code-input {
+        width: 120px;
+    }
+}
+
+/* Small phones breakpoint */
+@media (max-width: 600px) {
+    .ticker {
+        font-size: 1rem;
+    }
+
+    .price {
+        font-size: 1rem;
+    }
+
+    .change {
+        font-size: 0.85rem;
+    }
+
+    .status-item {
+        font-size: 0.8rem;
+    }
+
+    .panel-header {
+        font-size: 0.85rem;
+        padding: 0.4rem;
+    }
+
+    .panel-content {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    /* Hide weather on very small screens to save space */
+    .weather-container {
+        display: none;
+    }
+
+    .marquee-container {
+        flex-basis: 100%;
+    }
+
+    .code-input-container.expanded .code-input {
+        width: 100px;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 400px) {
+    .ticker {
+        font-size: 0.9rem;
+        gap: 0.5rem;
+    }
+
+    .price-marker {
+        flex-direction: column;
+        gap: 0.25rem;
+        align-items: center;
+    }
+
+    .market-status {
+        gap: 0.5rem;
+    }
+
+    .status-item {
+        font-size: 0.75rem;
+    }
+
+    .panel {
+        min-height: 200px;
+    }
+
+    .panel-content {
+        padding: 0.5rem;
+    }
+
+    #panel-profile .name {
+        font-size: 1.2rem;
+    }
+
+    #panel-profile .title,
+    #panel-profile .location {
+        font-size: 0.85rem;
+    }
+
+    .book-item {
+        width: 80px;
+    }
+
+    .book-info {
+        font-size: 0.7rem;
     }
 }
