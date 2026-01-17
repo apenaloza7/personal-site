@@ -79,26 +79,43 @@ body {
     gap: 1.5rem;
 }
 
-/* Terminal Box (ASCII bordered sections) */
+/* Terminal Box (CSS bordered sections) */
 .terminal-box {
     display: flex;
     flex-direction: column;
+    border: 1px solid var(--noir-cyan);
+    border-radius: 0;
+    position: relative;
 }
 
-.box-header,
-.box-footer {
+.box-header {
     color: var(--noir-cyan);
-    white-space: pre;
-    overflow: hidden;
     font-size: 14px;
     line-height: 1;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--noir-cyan);
+    display: flex;
+    align-items: center;
+}
+
+.box-header::before {
+    content: '[ ';
+    color: var(--noir-cyan);
+}
+
+.box-header::after {
+    content: ' ]';
+    color: var(--noir-cyan);
+}
+
+.box-label {
+    color: var(--noir-cyan);
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .box-content {
     padding: 0.75rem 1rem;
-    border-left: 1px solid var(--noir-cyan);
-    border-right: 1px solid var(--noir-cyan);
-    margin-left: 0;
     min-height: 60px;
 }
 
@@ -279,10 +296,13 @@ body {
         gap: 0.5rem;
     }
 
-    .box-header,
-    .box-footer {
-        font-size: 11px;
-        overflow-x: auto;
+    .box-header {
+        font-size: 12px;
+        padding: 0.4rem 0.75rem;
+    }
+
+    .box-content {
+        padding: 0.5rem 0.75rem;
     }
 
     .experience-header,
@@ -299,6 +319,70 @@ body {
 
     .contact-label {
         min-width: auto;
+    }
+
+    /* Increase touch targets */
+    .back-link {
+        padding: 0.5rem;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .contact-value {
+        padding: 0.25rem 0;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .project-link {
+        padding: 0.25rem 0;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+}
+
+/* Small phones */
+@media (max-width: 600px) {
+    body {
+        font-size: 11px;
+    }
+
+    .terminal-title {
+        font-size: 0.85rem;
+    }
+
+    .profile-name {
+        font-size: 1.25rem;
+    }
+
+    .box-header {
+        font-size: 11px;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 400px) {
+    body {
+        font-size: 10px;
+    }
+
+    .terminal-container {
+        padding: 0.25rem;
+    }
+
+    .box-content {
+        padding: 0.4rem 0.5rem;
+    }
+
+    .profile-name {
+        font-size: 1.1rem;
+    }
+
+    .terminal-title {
+        font-size: 0.75rem;
     }
 }
 
