@@ -18,6 +18,7 @@
 
 html, body {
     height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll on mobile */
 }
 
 body.workstation-body {
@@ -840,12 +841,14 @@ body.workstation-body {
 @media (max-width: 768px) {
     body.workstation-body {
         height: auto;
+        overflow-x: hidden; /* Prevent horizontal scroll */
         overflow-y: auto; /* Allow body scroll on mobile */
     }
     .workstation-grid {
         grid-template-columns: 1fr;
         height: auto;
-        overflow: visible;
+        overflow: hidden; /* Prevent horizontal overflow */
+        max-width: 100vw; /* Ensure grid doesn't exceed viewport */
     }
     .panel {
         min-height: 250px; /* Give panels some minimum height */
@@ -855,17 +858,22 @@ body.workstation-body {
         flex-wrap: wrap;     /* Allow items to wrap */
         justify-content: space-between;
         gap: 0.5rem;
+        max-width: 100vw; /* Prevent header overflow */
+        overflow: hidden;
     }
     .ticker {
         flex-basis: 100%; /* Take full width */
         justify-content: center;
         text-align: center;
         font-size: 1.2rem;
+        overflow: hidden;
     }
     .market-status {
         flex-basis: 100%;
         justify-content: center;
         gap: 1rem;
+        flex-wrap: wrap;
+        overflow: hidden;
     }
 
     .post-full-title {
@@ -976,9 +984,9 @@ body.workstation-body {
         font-size: 0.85rem;
     }
 
-    /* Hide weather on very small screens to save space */
-    .weather-container {
-        display: none;
+    /* Compact weather display on small screens */
+    .weather-display {
+        font-size: 0.75rem;
     }
 
     .marquee-container {
