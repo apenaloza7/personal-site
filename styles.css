@@ -158,6 +158,26 @@ body.workstation-body {
     color: var(--accent-green);
 }
 
+/* Recruiter Mode Link */
+.recruiter-link {
+    text-decoration: none;
+    color: var(--secondary-text);
+    transition: color 0.2s ease;
+}
+
+.recruiter-link:hover {
+    color: var(--primary-text);
+}
+
+.recruiter-link .status-value {
+    color: var(--accent-green);
+    transition: color 0.2s ease;
+}
+
+.recruiter-link:hover .status-value {
+    color: var(--primary-text);
+}
+
 /* --- Info Bar Styles (Weather + Marquee) --- */
 .info-bar {
     flex-basis: 100%;

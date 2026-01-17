@@ -36,6 +36,11 @@ export function initializeCodeInput() {
                 triggerHandAnimation();
             }
 
+            // Easter egg: Navigate to simple view
+            if (code.toUpperCase() === 'SIMPLE') {
+                window.location.href = 'simple.html';
+            }
+
             input.value = '';
             container.classList.remove('expanded');
             input.blur();
