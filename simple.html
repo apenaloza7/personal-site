@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Alejandro Penaloza - Software Engineer | Simple View">
+    <title>Pena Terminal | Simple View</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="terminal-noir.css" />
+</head>
+<body>
+    <div class="terminal-container">
+        <header class="terminal-header">
+            <a href="index.html" class="back-link">[← RETURN TO MAIN]</a>
+            <span class="terminal-title">PENA_TERMINAL // SIMPLE_VIEW</span>
+        </header>
+
+        <main class="terminal-main">
+            <!-- Profile Section -->
+            <section class="terminal-box">
+                <div class="box-header">┌─[ PROFILE ]────────────────────────────────────────────────────────────┐</div>
+                <div class="box-content" id="simple-profile">
+                    <span class="loading">Loading profile data...</span>
+                </div>
+                <div class="box-footer">└────────────────────────────────────────────────────────────────────────┘</div>
+            </section>
+
+            <!-- Experience/Portfolio Section -->
+            <section class="terminal-box">
+                <div class="box-header">┌─[ EXPERIENCE ]─────────────────────────────────────────────────────────┐</div>
+                <div class="box-content" id="simple-experience">
+                    <span class="loading">Loading experience data...</span>
+                </div>
+                <div class="box-footer">└────────────────────────────────────────────────────────────────────────┘</div>
+            </section>
+
+            <!-- Projects Section -->
+            <section class="terminal-box">
+                <div class="box-header">┌─[ PROJECTS ]───────────────────────────────────────────────────────────┐</div>
+                <div class="box-content" id="simple-projects">
+                    <span class="loading">Loading projects data...</span>
+                </div>
+                <div class="box-footer">└────────────────────────────────────────────────────────────────────────┘</div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="terminal-box">
+                <div class="box-header">┌─[ CONTACT ]────────────────────────────────────────────────────────────┐</div>
+                <div class="box-content" id="simple-contact">
+                    <div class="contact-row">
+                        <span class="contact-label">GITHUB</span>
+                        <a href="https://github.com/apenaloza7" target="_blank" rel="noopener noreferrer" class="contact-value">github.com/apenaloza7</a>
+                    </div>
+                    <div class="contact-row">
+                        <span class="contact-label">LINKEDIN</span>
+                        <a href="https://www.linkedin.com/in/penalozaalejandro/" target="_blank" rel="noopener noreferrer" class="contact-value">linkedin.com/in/penalozaalejandro</a>
+                    </div>
+                </div>
+                <div class="box-footer">└────────────────────────────────────────────────────────────────────────┘</div>
+            </section>
+        </main>
+
+        <footer class="terminal-footer">
+            <span>© 2026 Alejandro Penaloza | <a href="index.html">View Full Site</a></span>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+    <script src="js/utils/contentful-client.js"></script>
+    <script type="module" src="js/simple.js"></script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+/**
+ * Terminal Noir / Wttr-Classic Theme
+ * A retro CLI aesthetic for recruiter-focused view
+ */
+
+:root {
+    --noir-bg: #000000;
+    --noir-fg: #d3d3d3;
+    --noir-cyan: #00ffff;
+    --noir-yellow: #ffff00;
+    --noir-magenta: #ff00ff;
+    --noir-blue: #5fafff;
+    --noir-green: #00ff00;
+    --noir-dim: #808080;
+    --noir-font: 'Courier New', 'Ubuntu Mono', 'Consolas', 'Liberation Mono', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--noir-bg);
+    color: var(--noir-fg);
+    font-family: var(--noir-font);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+}
+
+/* Terminal Container */
+.terminal-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--noir-dim);
+}
+
+.back-link {
+    color: var(--noir-cyan);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.back-link:hover {
+    color: var(--noir-yellow);
+}
+
+.terminal-title {
+    color: var(--noir-green);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Main Content */
+.terminal-main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Terminal Box (ASCII bordered sections) */
+.terminal-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.box-header,
+.box-footer {
+    color: var(--noir-cyan);
+    white-space: pre;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.box-content {
+    padding: 0.75rem 1rem;
+    border-left: 1px solid var(--noir-cyan);
+    border-right: 1px solid var(--noir-cyan);
+    margin-left: 0;
+    min-height: 60px;
+}
+
+/* Loading State */
+.loading {
+    color: var(--noir-dim);
+    font-style: italic;
+}
+
+.loading::after {
+    content: '';
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { content: '_'; }
+    50% { content: ''; }
+}
+
+/* Profile Section Styles */
+.profile-name {
+    font-size: 1.5rem;
+    color: var(--noir-yellow);
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.profile-title {
+    color: var(--noir-cyan);
+    margin-bottom: 0.25rem;
+}
+
+.profile-location {
+    color: var(--noir-dim);
+    margin-bottom: 1rem;
+}
+
+.profile-description {
+    color: var(--noir-fg);
+    line-height: 1.6;
+}
+
+/* Experience Section Styles */
+.experience-item {
+    margin-bottom: 1rem;
+}
+
+.experience-item:last-child {
+    margin-bottom: 0;
+}
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.company-name {
+    color: var(--noir-yellow);
+    font-weight: bold;
+}
+
+.date-range {
+    color: var(--noir-dim);
+    font-size: 0.9rem;
+}
+
+.role-item {
+    margin-left: 1.5rem;
+    margin-top: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.role-item::before {
+    content: '└─ ';
+    color: var(--noir-cyan);
+}
+
+.role-title {
+    color: var(--noir-fg);
+}
+
+.role-date {
+    color: var(--noir-dim);
+    font-size: 0.85rem;
+}
+
+/* Projects Section Styles */
+.project-item {
+    margin-bottom: 0.5rem;
+}
+
+.project-item::before {
+    content: '• ';
+    color: var(--noir-cyan);
+}
+
+.project-link {
+    color: var(--noir-blue);
+    text-decoration: none;
+}
+
+.project-link:hover {
+    color: var(--noir-yellow);
+    text-decoration: underline;
+}
+
+/* Contact Section Styles */
+.contact-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    align-items: baseline;
+}
+
+.contact-row:last-child {
+    margin-bottom: 0;
+}
+
+.contact-label {
+    color: var(--noir-magenta);
+    min-width: 100px;
+    font-weight: bold;
+}
+
+.contact-value {
+    color: var(--noir-blue);
+    text-decoration: none;
+}
+
+.contact-value:hover {
+    color: var(--noir-yellow);
+}
+
+/* Footer */
+.terminal-footer {
+    margin-top: 2rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--noir-dim);
+    text-align: center;
+    color: var(--noir-dim);
+    font-size: 0.85rem;
+}
+
+.terminal-footer a {
+    color: var(--noir-cyan);
+    text-decoration: none;
+}
+
+.terminal-footer a:hover {
+    color: var(--noir-yellow);
+}
+
+/* Error State */
+.error {
+    color: #ff6b6b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        font-size: 12px;
+    }
+
+    .terminal-container {
+        padding: 0.5rem;
+    }
+
+    .terminal-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .box-header,
+    .box-footer {
+        font-size: 11px;
+        overflow-x: auto;
+    }
+
+    .experience-header,
+    .role-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .contact-row {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .contact-label {
+        min-width: auto;
+    }
+}
+
+/* Print Styles - Clean for printing */
+@media print {
+    body {
+        background-color: white;
+        color: black;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .terminal-container {
+        max-width: 100%;
+    }
+
+    .back-link {
+        display: none;
+    }
+
+    .box-header,
+    .box-footer {
+        color: #333;
+    }
+
+    .box-content {
+        border-color: #333;
+    }
+
+    .profile-name,
+    .company-name {
+        color: black;
+    }
+
+    .profile-title,
+    .project-link,
+    .contact-value {
+        color: #0066cc;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a[href]::after {
+        content: ' (' attr(href) ')';
+        font-size: 0.8em;
+        color: #666;
+    }
+
+    .terminal-footer a[href]::after {
+        content: none;
+    }
+}
