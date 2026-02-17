@@ -89,7 +89,7 @@ async function renderExperience() {
             return `
                 <div class="experience-item">
                     <div class="experience-header">
-                        <span class="company-name">[${job.companyName || 'N/A'}]</span>
+                        <span class="company-name">${job.companyName || 'N/A'}</span>
                         <span class="date-range">${job.employmentDateRange || ''}</span>
                     </div>
                     ${rolesHtml}
