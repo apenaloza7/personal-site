@@ -19,6 +19,12 @@
     --glow-cyan: rgba(105, 210, 231, 0.1);
     --glow-cyan-border: rgba(105, 210, 231, 0.15);
     --apple-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Gradient border variables */
+    --gradient-border-from: #69D2E7;
+    --gradient-border-to: #F3D434;
+    --gradient-border-opacity: 0.3;
+    --gradient-border-hover-opacity: 0.7;
 }
 
 * {
@@ -41,6 +47,7 @@ body.workstation-body {
         radial-gradient(circle at 30% 80%, rgba(10, 26, 31, 0.5) 0%, transparent 40%),
         radial-gradient(circle at 70% 20%, rgba(13, 10, 26, 0.4) 0%, transparent 35%),
         linear-gradient(135deg, #0a0e1a 0%, #121212 40%, #0a1a1f 70%, #0d0a1a 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     background-attachment: fixed;
     color: var(--primary-text);
     font-family: var(--font-family);
@@ -48,6 +55,24 @@ body.workstation-body {
     flex-direction: column;
     height: 100%;
     overflow: hidden; /* Prevent body scroll, panels will scroll */
+    animation: mesh-drift 35s ease-in-out infinite;
+}
+
+@keyframes mesh-drift {
+    0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 30% 80%, 70% 20%, 0% 0%; }
+    33%      { background-position: 10% 15%, 80% 70%, 55% 45%, 25% 85%, 75% 15%, 0% 0%; }
+    66%      { background-position: 5% 10%, 90% 80%, 45% 55%, 35% 75%, 65% 25%, 0% 0%; }
+}
+
+/* --- Grain Overlay --- */
+.grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
 }
 
 /* --- Header --- */
@@ -305,10 +330,11 @@ body.workstation-body {
 }
 
 .panel {
+    position: relative;
     background: var(--glass-bg);
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
+    border: 1px solid transparent;
     border-radius: var(--glass-radius);
     box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.4),
@@ -317,7 +343,34 @@ body.workstation-body {
     display: flex;
     flex-direction: column;
     overflow: hidden; /* Important for self-contained scrolling */
-    transition: box-shadow 0.3s var(--apple-ease), border-color 0.3s var(--apple-ease);
+    transition: box-shadow 0.3s var(--apple-ease);
+}
+
+.panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--gradient-border-from), var(--gradient-border-to));
+    opacity: var(--gradient-border-opacity);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0) padding-box;
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0) padding-box;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 0;
+    transition: opacity 0.3s var(--apple-ease);
+}
+
+.panel > .panel-header,
+.panel > .panel-content {
+    position: relative;
+    z-index: 1;
 }
 
 .panel-header {
@@ -342,7 +395,10 @@ body.workstation-body {
         0 8px 32px rgba(0, 0, 0, 0.5),
         0 0 2px rgba(105, 210, 231, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.panel:hover::before {
+    opacity: var(--gradient-border-hover-opacity);
 }
 
 /* --- Panel Specific Styles --- */
@@ -932,6 +988,7 @@ body.workstation-body {
         background-image:
             radial-gradient(ellipse 80% 60% at 20% 30%, rgba(10, 26, 31, 0.6) 0%, transparent 60%),
             linear-gradient(135deg, #0a0e1a 0%, #121212 50%, #0a1a1f 100%);
+        animation: none; /* Disable mesh animation on mobile */
     }
 
     .workstation-grid {
@@ -959,7 +1016,22 @@ body.workstation-body {
             0 4px 16px rgba(0, 0, 0, 0.4),
             0 0 1px rgba(105, 210, 231, 0.05),
             inset 0 1px 0 rgba(255, 255, 255, 0.03);
-        border-color: var(--glass-border);
+        border-color: transparent;
+    }
+
+    /* Dim gradient borders on mobile, no hover brightening */
+    .panel::before {
+        opacity: 0.15;
+        transition: none;
+    }
+
+    .panel:hover::before {
+        opacity: 0.15;
+    }
+
+    /* Reduce grain on mobile for battery/performance */
+    .grain-overlay {
+        opacity: 0.02;
     }
 
     .project-list li a:hover,
@@ -1206,6 +1278,14 @@ body.workstation-body {
     #panel-contact .contact-link,
     .book-cover-container {
         transition: none;
+    }
+
+    .panel::before {
+        transition: none;
+    }
+
+    body.workstation-body {
+        animation: none;
     }
 
     .status-value.up {
