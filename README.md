@@ -1,81 +1,46 @@
 # Personal Portfolio Website
 
-This codebase contains the source for a personal portfolio website designed with a financial workstation theme. The application features a real-time stock ticker interface, interactive panels for professional experience and projects, and a dynamic blog system. It is built using vanilla JavaScript and integrates with Contentful as a headless CMS for content management.
+A minimal, mobile-first personal portfolio built with vanilla HTML, CSS, and JavaScript. Content is managed in Contentful and deployed to GitHub Pages.
 
-## System Architecture
+## Tech Stack
 
-The following diagram illustrates the high-level architecture of the system, showing the relationships between the user, the hosting infrastructure (GitHub Pages), and the data source (Contentful).
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript (ES modules)
+- **CMS:** Contentful
+- **Analytics:** Inspectlet
+- **Deployment:** GitHub Pages via GitHub Actions
+- **Typography:** Space Grotesk + JetBrains Mono (Google Fonts)
 
-```mermaid
-graph TD
-    User((User)) -->|HTTPS| CDN[GitHub Pages]
-    CDN -->|Serves Static Assets| Browser[Web Browser]
-    Browser -->|API Requests| CMS[Contentful CMS]
-    Dev[Developer] -->|Push| Repo[GitHub Repository]
-    Repo -->|Action| CI[GitHub Actions]
-    CI -->|Deploy| CDN
-```
-
-## Technical Overview
-
-### Tech Stack
-
--   **Frontend:** HTML5, CSS3, Vanilla JavaScript
--   **CMS:** Contentful (Headless CMS)
--   **Analytics:** Inspectlet
--   **Deployment:** GitHub Pages via GitHub Actions
--   **Typography:** IBM Plex Mono (Google Fonts)
-
-### Project Structure
-
-The project maintains a modular structure to separate concerns between styling, logic, and content handling.
+## Project Structure
 
 ```
 personal-site/
-├── index.html              # Main application entry point
-├── styles.css              # Core styling definitions
+├── index.html              # Homepage
+├── styles.css              # Pena Minimal design system
+├── pages/
+│   └── blog.html           # Individual blog post template
 ├── js/
-│   ├── main.js            # Application bootstrapper
-│   ├── utils/             # Shared utilities (CMS client, DOM helpers)
-│   ├── panels/            # UI component logic (Profile, Portfolio, Blog)
-│   └── features/          # Interactive elements (Clock, Ticker)
-└── pages/
-    └── blog.html          # Individual blog post template
+    ├── main.js             # App bootstrap
+    ├── blog.js             # Blog post page logic
+    ├── utils/              # CMS client, DOM helpers, rich-text renderer
+    ├── panels/             # Section renderers (hero, work, projects, etc.)
+    └── features/           # Ticker band, command-input easter egg
 ```
 
-## Application Logic
+## Content Types (Contentful)
 
-### Initialization Sequence
+| Section  | Content type     | Key fields |
+| -------- | ---------------- | ---------- |
+| Hero     | `profile`        | `name`, `description`, `location` |
+| Work     | `job`            | `companyName`, `employmentDateRange`, linked `roles` |
+| Projects | `project`        | `name`, `url`, `blurb`, `tag` |
+| Writing  | `blog`           | `title`, `publishDate`, `postBody`, `category`, `readTime` |
+| Reading  | `book`           | `title`, `shortTitle`, `status` |
+| Ticker   | `marqueeMessage` | `message`, `isActive` |
 
-Upon loading, the application initializes interactive features (like the clock and ticker) and content panels concurrently. This ensures a responsive user experience while data is being fetched.
+## Local Development
 
-```mermaid
-sequenceDiagram
-    participant DOM as DOM Content Loaded
-    participant Main as main.js
-    participant Feat as Features (Clock/Ticker)
-    participant Client as Contentful Client
-    participant Panels as Content Panels
-    
-    DOM->>Main: Trigger initializeApp()
-    Main->>Feat: Initialize Interactive Features
-    Main->>Client: Setup Contentful Client
-    Main->>Panels: loadAllContent()
-    par Load Panels
-        Panels->>Panels: Render Profile
-        Panels->>Panels: Render Portfolio
-        Panels->>Panels: Render Blog
-    end
-```
+Serve the repo root with any static file server (e.g. `python -m http.server`). Contentful credentials in `js/utils/contentful-client.js` are replaced by GitHub Actions secrets at deploy time.
 
-### Data Pipeline
+## Archive
 
-Data flows from the CMS to the user interface through a standardized pipeline of fetching, normalization, and rendering.
-
-```mermaid
-flowchart LR
-    Init[Panel Initialization] --> Fetch[Fetch Contentful Entries]
-    Fetch -->|JSON| Map[Map/Transform Data]
-    Map -->|Model| DOM[Generate HTML Elements]
-    DOM -->|Insert| UI[Update User Interface]
-```
+The previous terminal-themed site lives in [`archive/`]. Unviewable for now. 

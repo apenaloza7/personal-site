@@ -1,32 +1,33 @@
 /**
- * Profile panel rendering logic
+ * Profile / hero section rendering
  */
 
 import { getContentfulEntries } from '../utils/contentful-utils.js'
 import { setLoadingState, setErrorState } from '../utils/ui-utils.js'
 
 /**
- * Renders the profile section with data from Contentful
+ * Renders the hero section from Contentful profile data
  * @async
  * @function renderProfile
  */
 export async function renderProfile() {
-	const panel = document.querySelector('#panel-profile .panel-content')
-	if (!panel) return
+	const container = document.getElementById('hero-content')
+	if (!container) return
 
-	setLoadingState(panel)
+	setLoadingState(container)
 	const entries = await getContentfulEntries({ content_type: 'profile', limit: 1 })
 
 	if (entries.length === 0) {
-		setErrorState(panel, 'No profile data available.')
+		setErrorState(container, 'No profile data available.')
 		return
 	}
 
 	const profile = entries[0].fields
-	panel.innerHTML = `
-		<h1 class="name">${profile.name || ''}</h1>
-		<h2 class="title">${profile.title || ''}</h2>
-		<h3 class="location">${profile.location || ''}</h3>
-		<p class="description">${profile.description || ''}</p>
+	const location = profile.location || 'charlotte, nc'
+
+	container.innerHTML = `
+		<h1 class="hero-name">${profile.name || ''}</h1>
+		<p class="hero-bio">${profile.description || ''}</p>
+		<div class="hero-status">${location.toLowerCase()}</div>
 	`
 }

@@ -1,5 +1,5 @@
 /**
- * Bookshelf panel rendering logic
+ * Reading / books section rendering
  */
 
 import { getContentfulEntries } from '../utils/contentful-utils.js'
@@ -7,83 +7,77 @@ import { setLoadingState, setErrorState } from '../utils/ui-utils.js'
 import { createElement } from '../utils/dom-utils.js'
 
 /**
- * Creates a book item element
- * @function createBookItem
- * @param {Object} book - Book fields object
- * @returns {Element} The book item element
+ * @param {string} status
+ * @returns {string}
  */
-const createBookItem = (book) => {
-    // Determine status class
-    let statusClass = ''
-    let statusLabel = ''
-    
-    if (book.status) {
-        const status = book.status.toLowerCase()
-        if (status.includes('reading')) {
-            statusClass = 'reading'
-            statusLabel = 'READING'
-        } else if (status.includes('unread')) {
-            statusClass = 'unread'
-            statusLabel = 'NOT READ'
-        } else if (status.includes('read')) {
-            statusClass = 'read'
-            statusLabel = 'READ'
-        }
-    }
-
-
-    const imageUrl = book.coverImage?.fields?.file?.url 
-        ? `https:${book.coverImage.fields.file.url}` 
-        : 'assets/placeholder_book.png' // Fallback if needed
-
-
-    const container = createElement('div', 'book-item')
-    
-    container.innerHTML = `
-        <div class="book-cover-container">
-            <img src="${imageUrl}" alt="Cover of ${book.title}" class="book-cover" loading="lazy">
-            <span class="book-status-badge ${statusClass}">${statusLabel}</span>
-        </div>
-        <div class="book-info">
-            <div class="book-title">${book.title || 'Untitled'}</div>
-            <div class="book-author">${book.author || 'Unknown Author'}</div>
-            ${book.rating ? `<div class="book-rating">${'★'.repeat(book.rating)}</div>` : ''}
-        </div>
-    `
-    
-    return container
+function formatBookStatus(status = '') {
+	const lower = status.toLowerCase()
+	if (lower.includes('reading')) return '★ reading'
+	if (lower.includes('unread') || lower.includes('tbr')) return 'tbr'
+	if (lower.includes('read')) return '★ read'
+	return status || ''
 }
 
 /**
- * Renders the bookshelf section with books from Contentful
+ * @param {Object} book
+ * @returns {Element}
+ */
+const createBookRow = (book) => {
+	const title = book.shortTitle || book.title || 'Untitled'
+	const row = createElement('div', 'list-row list-row--reading')
+	row.innerHTML = `
+		<span class="list-row-title list-row-title--muted">${title}</span>
+		<span class="list-row-meta">${formatBookStatus(book.status)}</span>
+	`
+	return row
+}
+
+/**
+ * Renders the reading section from Contentful book entries
  * @async
  * @function renderBooks
  */
 export async function renderBooks() {
-    const panel = document.querySelector('#panel-books .panel-content')
-    if (!panel) return
+	const container = document.getElementById('reading-content')
+	if (!container) return
 
-    setLoadingState(panel)
+	setLoadingState(container)
 
-    // Fetch books, ordered by status then title
-    // Note: 'sys.createdAt' is a safe default sort if custom fields aren't indexed yet
-    const entries = await getContentfulEntries({ 
-        content_type: 'book', 
-        order: '-sys.createdAt' 
-    })
+	const entries = await getContentfulEntries({
+		content_type: 'book',
+		order: '-sys.createdAt',
+	})
 
-    if (entries.length === 0) {
-        // If no books found, we can show a placeholder or empty state
-        // For now, let's keep it clean or show a message
-        setErrorState(panel, 'Library offline.')
-        return
-    }
+	if (entries.length === 0) {
+		setErrorState(container, 'Nothing on the shelf yet.')
+		return
+	}
 
-    panel.innerHTML = '<div class="books-grid"></div>'
-    const grid = panel.querySelector('.books-grid')
+	const grid = createElement('div', 'reading-grid')
+	entries
+		.map((item) => createBookRow(item.fields))
+		.forEach((row) => grid.appendChild(row))
 
-    entries
-        .map(item => createBookItem(item.fields))
-        .forEach(bookItem => grid.appendChild(bookItem))
+	container.innerHTML = ''
+	container.appendChild(grid)
 }
 
+/**
+ * Returns the title of the first book currently being read
+ * @async
+ * @returns {Promise<string|null>}
+ */
+export async function getCurrentlyReadingTitle() {
+	const entries = await getContentfulEntries({
+		content_type: 'book',
+		order: '-sys.createdAt',
+	})
+
+	const reading = entries.find((entry) => {
+		const status = (entry.fields.status || '').toLowerCase()
+		return status.includes('reading')
+	})
+
+	if (!reading) return null
+	return reading.fields.shortTitle || reading.fields.title || null
+}
