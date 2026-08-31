@@ -186,7 +186,7 @@ a:hover {
 
 @keyframes pm-ticker {
     from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    to { transform: translateX(var(--ticker-shift, -33.333%)); }
 }
 
 /* --- Layout --- */

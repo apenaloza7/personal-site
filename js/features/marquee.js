@@ -18,6 +18,8 @@ function tickerItemHtml(text) {
 	return `<span class="ticker-item"><span class="ticker-marker">·</span>${text}</span>`
 }
 
+const MIN_GROUPS = 3
+
 /**
  * @param {string[]} items
  * @param {boolean} [hidden]
@@ -26,6 +28,42 @@ function tickerItemHtml(text) {
 function buildTickerGroup(items, hidden = false) {
 	const hiddenAttr = hidden ? ' aria-hidden="true"' : ''
 	return `<div class="ticker-group"${hiddenAttr}>${items.map(tickerItemHtml).join('')}</div>`
+}
+
+/**
+ * @param {HTMLElement} track
+ * @param {string[]} items
+ */
+function renderTicker(track, items) {
+	const container = track.parentElement
+	const groups = Array.from({ length: MIN_GROUPS }, (_, index) =>
+		buildTickerGroup(items, index > 0)
+	)
+	track.innerHTML = groups.join('')
+
+	const group = track.querySelector('.ticker-group')
+	const groupWidth = group?.offsetWidth ?? 0
+	const containerWidth = container?.offsetWidth ?? window.innerWidth
+
+	if (groupWidth > 0 && groupWidth * MIN_GROUPS < containerWidth * 2) {
+		const totalGroups = Math.max(MIN_GROUPS, Math.ceil((containerWidth * 2) / groupWidth))
+		track.innerHTML = Array.from({ length: totalGroups }, (_, index) =>
+			buildTickerGroup(items, index > 0)
+		).join('')
+	}
+
+	const groupCount = track.querySelectorAll('.ticker-group').length
+	track.style.setProperty('--ticker-shift', `-${100 / groupCount}%`)
+	restartAnimation(track)
+}
+
+/**
+ * @param {HTMLElement} track
+ */
+function restartAnimation(track) {
+	track.style.animation = 'none'
+	void track.offsetWidth
+	track.style.animation = ''
 }
 
 /**
@@ -71,10 +109,13 @@ async function fetchTickerItems() {
  * Initializes the homepage ticker band
  * @function initializeMarquee
  */
-export async function initializeMarquee() {
+export function initializeMarquee() {
 	const track = document.getElementById('ticker-track')
 	if (!track) return
 
-	const items = await fetchTickerItems()
-	track.innerHTML = buildTickerGroup(items) + buildTickerGroup(items, true)
+	renderTicker(track, DEFAULT_ITEMS)
+
+	fetchTickerItems()
+		.then((items) => renderTicker(track, items))
+		.catch((error) => console.error('Error initializing ticker:', error))
 }
