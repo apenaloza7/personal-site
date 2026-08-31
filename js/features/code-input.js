@@ -1,91 +1,117 @@
 /**
- * Collapsible Code Input Feature
- * Handles the logic for expanding/collapsing the code input in the navbar
+ * Command-input easter egg — triggered from header >_
  */
 
-export function initializeCodeInput() {
-    const container = document.querySelector('.code-input-container');
-    const toggleBtn = document.getElementById('code-toggle-btn');
-    const input = document.getElementById('code-input');
+const SIX_SEVEN_CSS = `
+.six-seven-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 9999; display: flex;
+    justify-content: space-between; overflow: hidden;
+    background-color: white; opacity: 0;
+    animation: fadeInOut 5s ease-in-out forwards;
+}
+@keyframes fadeInOut {
+    0% { opacity: 0; } 5% { opacity: 1; } 95% { opacity: 1; } 100% { opacity: 0; }
+}
+.hand-img { position: absolute; width: 200px; top: -300px; }
+.hand-left { left: 10%; animation: dropAndBobLeft 5s ease-in-out forwards; }
+.hand-right { right: 10%; animation: dropAndBobRight 5s ease-in-out forwards; }
+@keyframes dropAndBobLeft {
+    0% { top: -300px; } 10% { top: 0; }
+    20% { top: -30px; } 30% { top: 0; } 40% { top: -30px; }
+    50% { top: 0; } 60% { top: -30px; } 70% { top: 0; }
+    80% { top: -30px; } 90% { top: 0; } 100% { top: -300px; }
+}
+@keyframes dropAndBobRight {
+    0% { top: -300px; } 10% { top: 0; }
+    20% { top: 30px; } 30% { top: 0; } 40% { top: 30px; }
+    50% { top: 0; } 60% { top: 30px; } 70% { top: 0; }
+    80% { top: 30px; } 90% { top: 0; } 100% { top: -300px; }
+}
+`
 
-    if (!container || !toggleBtn || !input) {
-        console.error('Code Input elements not found:', { container, toggleBtn, input });
-        return;
-    }
+let sixSevenStyleInjected = false
 
-    toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent document click listener from firing immediately
-        container.classList.toggle('expanded');
-        
-        if (container.classList.contains('expanded')) {
-            setTimeout(() => input.focus(), 50); // Small delay to ensure transition starts
-        }
-    });
-
-    // Close on blur or Escape key
-    input.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            container.classList.remove('expanded');
-            input.blur();
-        }
-        if (e.key === 'Enter') {
-            const code = input.value.trim();
-            console.log('Code entered:', code);
-
-            if (code === '67') {
-                triggerHandAnimation();
-            }
-
-            // Easter egg: Navigate to simple view
-            if (code.toUpperCase() === 'SIMPLE') {
-                window.location.href = 'simple.html';
-            }
-
-            input.value = '';
-            container.classList.remove('expanded');
-            input.blur();
-        }
-    });
-
-    // Optional: Close when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!container.contains(e.target) && container.classList.contains('expanded')) {
-            container.classList.remove('expanded');
-        }
-    });
+function ensureSixSevenStyles() {
+	if (sixSevenStyleInjected) return
+	const style = document.createElement('style')
+	style.textContent = SIX_SEVEN_CSS
+	document.head.appendChild(style)
+	sixSevenStyleInjected = true
 }
 
 function triggerHandAnimation() {
-    // Check if animation is already running to prevent overlap
-    if (document.querySelector('.six-seven-overlay')) return;
+	if (document.querySelector('.six-seven-overlay')) return
 
-    // Create overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'six-seven-overlay';
+	ensureSixSevenStyles()
 
-    // Create left hand (Positioned on Right)
-    const leftHand = document.createElement('img');
-    leftHand.src = 'assets/left_hand.png';
-    leftHand.className = 'hand-img hand-right'; // Use .hand-right class to position it on the right
-    leftHand.alt = 'Left Hand';
+	const overlay = document.createElement('div')
+	overlay.className = 'six-seven-overlay'
 
-    // Create right hand (Positioned on Left)
-    const rightHand = document.createElement('img');
-    rightHand.src = 'assets/right_hand.png';
-    rightHand.className = 'hand-img hand-left'; // Use .hand-left class to position it on the left
-    rightHand.alt = 'Right Hand';
+	const assetBase = window.location.pathname.includes('/pages/') ? '../assets/' : 'assets/'
 
-    // Append hands to overlay
-    overlay.appendChild(rightHand);
-    overlay.appendChild(leftHand);
+	const leftHand = document.createElement('img')
+	leftHand.src = `${assetBase}left_hand.png`
+	leftHand.className = 'hand-img hand-right'
+	leftHand.alt = ''
 
-    // Append overlay to body
-    document.body.appendChild(overlay);
+	const rightHand = document.createElement('img')
+	rightHand.src = `${assetBase}right_hand.png`
+	rightHand.className = 'hand-img hand-left'
+	rightHand.alt = ''
 
-    // Remove after animation (5s)
-    setTimeout(() => {
-        if (document.body.contains(overlay)) {
-            document.body.removeChild(overlay);
-        }
-    }, 5000);
+	overlay.appendChild(rightHand)
+	overlay.appendChild(leftHand)
+	document.body.appendChild(overlay)
+
+	setTimeout(() => {
+		if (document.body.contains(overlay)) {
+			document.body.removeChild(overlay)
+		}
+	}, 5000)
+}
+
+/**
+ * Initializes the command-input easter egg
+ * @function initializeCodeInput
+ */
+export function initializeCodeInput() {
+	const container = document.getElementById('code-input-container')
+	const toggleBtn = document.getElementById('code-toggle-btn')
+	const input = document.getElementById('code-input')
+
+	if (!container || !toggleBtn || !input) return
+
+	toggleBtn.addEventListener('click', (e) => {
+		e.stopPropagation()
+		container.classList.toggle('expanded')
+
+		if (container.classList.contains('expanded')) {
+			setTimeout(() => input.focus(), 50)
+		}
+	})
+
+	input.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') {
+			container.classList.remove('expanded')
+			input.blur()
+		}
+		if (e.key === 'Enter') {
+			const code = input.value.trim()
+
+			if (code === '67') {
+				triggerHandAnimation()
+			}
+
+			input.value = ''
+			container.classList.remove('expanded')
+			input.blur()
+		}
+	})
+
+	document.addEventListener('click', (e) => {
+		if (!container.contains(e.target) && !toggleBtn.contains(e.target) && container.classList.contains('expanded')) {
+			container.classList.remove('expanded')
+		}
+	})
 }

@@ -1,5 +1,5 @@
 /**
- * Projects panel rendering logic
+ * Projects section rendering
  */
 
 import { getContentfulEntries } from '../utils/contentful-utils.js'
@@ -7,49 +7,59 @@ import { setLoadingState, setErrorState } from '../utils/ui-utils.js'
 import { createElement } from '../utils/dom-utils.js'
 
 /**
- * Creates a project list item
- * @function createProjectItem
- * @param {Object} project - Project item with fields
- * @returns {Element} The list item element
+ * @param {Object} project
+ * @returns {Element}
  */
-const createProjectItem = (project) => {
-	const link = createElement('a')
-	// Use fields.url if available, otherwise default to #
-	link.href = project.fields.url || '#'
-    if (project.fields.url) {
-        link.target = '_blank'
-        link.rel = 'noopener noreferrer'
-    }
-	link.textContent = project.fields.name || 'Untitled Project'
+const createProjectRow = (project) => {
+	const fields = project.fields
+	const link = createElement('a', 'list-row')
+	link.href = fields.url || '#'
 
-	const listItem = createElement('li')
-	listItem.appendChild(link)
-	return listItem
+	if (fields.url) {
+		link.target = '_blank'
+		link.rel = 'noopener noreferrer'
+	}
+
+	const blurbHtml = fields.blurb
+		? `<span class="list-row-blurb">${fields.blurb}</span>`
+		: ''
+	const tagHtml = fields.tag
+		? `<span class="list-row-tag">${fields.tag}</span>`
+		: ''
+
+	link.innerHTML = `
+		<span class="list-row-title">${fields.name || 'Untitled Project'}</span>
+		${blurbHtml}
+		${tagHtml}
+	`
+
+	const li = createElement('li')
+	li.appendChild(link)
+	return li
 }
 
 /**
- * Renders the projects section with data from Contentful
+ * Renders the projects section from Contentful
  * @async
  * @function renderProjects
  */
 export async function renderProjects() {
-	const panel = document.querySelector('#panel-projects .panel-content')
-	if (!panel) return
+	const container = document.getElementById('projects-content')
+	if (!container) return
 
-	setLoadingState(panel)
+	setLoadingState(container)
 	const entries = await getContentfulEntries({ content_type: 'project', order: 'fields.name' })
 
 	if (entries.length === 0) {
-		setErrorState(panel, 'No projects data available.')
+		setErrorState(container, 'No projects yet.')
 		return
 	}
 
-	panel.innerHTML = '' // Clear loading state
-    const projectList = createElement('ul', 'project-list')
-
+	const list = createElement('ul', 'list-rows')
 	entries
-		.map(item => createProjectItem(item))
-		.forEach(projectItem => projectList.appendChild(projectItem))
+		.map(createProjectRow)
+		.forEach((row) => list.appendChild(row))
 
-    panel.appendChild(projectList)
+	container.innerHTML = ''
+	container.appendChild(list)
 }

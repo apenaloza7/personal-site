@@ -1,5 +1,5 @@
 /**
- * Blog panel rendering logic
+ * Writing / blog list section rendering
  */
 
 import { getContentfulEntries } from '../utils/contentful-utils.js'
@@ -7,47 +7,61 @@ import { setLoadingState } from '../utils/ui-utils.js'
 import { createElement } from '../utils/dom-utils.js'
 
 /**
- * Creates a blog post list item
- * @function createBlogPostItem
- * @param {Object} item - Blog post item with sys and fields    
- * @returns {Element} The list item element
+ * @param {string|Date} date
+ * @returns {string}
  */
-const createBlogPostItem = (item) => {
-	const link = createElement('a')
-	link.href = `pages/blog.html?id=${item.sys.id}`
-	link.textContent = item.fields.title || 'Untitled Post'
-
-	const listItem = createElement('li')
-	listItem.appendChild(link)
-	return listItem
+export function formatPostDate(date) {
+	if (!date) return ''
+	const d = new Date(date)
+	if (Number.isNaN(d.getTime())) return ''
+	const year = d.getFullYear()
+	const month = String(d.getMonth() + 1).padStart(2, '0')
+	return `${year}.${month}`
 }
 
 /**
- * Renders the blog posts section with blog data from Contentful
+ * @param {Object} item
+ * @returns {Element}
+ */
+const createBlogRow = (item) => {
+	const link = createElement('a', 'list-row')
+	link.href = `pages/blog.html?id=${item.sys.id}`
+
+	link.innerHTML = `
+		<span class="list-row-title">${item.fields.title || 'Untitled Post'}</span>
+		<span class="list-row-meta">${formatPostDate(item.fields.publishDate)}</span>
+	`
+
+	const li = createElement('li')
+	li.appendChild(link)
+	return li
+}
+
+/**
+ * Renders the writing section from Contentful blog entries
  * @async
  * @function renderBlogPosts
  */
 export async function renderBlogPosts() {
-	const panel = document.querySelector('#panel-blog .panel-content')
-	if (!panel) return
+	const container = document.getElementById('writing-content')
+	if (!container) return
 
-	setLoadingState(panel)
+	setLoadingState(container)
 	const entries = await getContentfulEntries({
 		content_type: 'blog',
-		order: '-fields.publishDate' // Order by publish date, most recent first
+		order: '-fields.publishDate',
 	})
 
 	if (entries.length === 0) {
-		panel.innerHTML = '<em>No blog posts yet.</em>'
+		container.innerHTML = '<p class="empty-state">No posts yet.</p>'
 		return
 	}
 
-	panel.innerHTML = '' // Clear loading
-	const postList = createElement('ul', 'blog-post-list')
-
+	const list = createElement('ul', 'list-rows')
 	entries
-		.map(createBlogPostItem)
-		.forEach(listItem => postList.appendChild(listItem))
+		.map(createBlogRow)
+		.forEach((row) => list.appendChild(row))
 
-	panel.appendChild(postList)
+	container.innerHTML = ''
+	container.appendChild(list)
 }
