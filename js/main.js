@@ -28,16 +28,16 @@ function loadAllContent() {
  */
 function initializeApp() {
 	try {
+		initializeContentfulClient()
+	} catch (error) {
+		console.error('Error initializing Contentful client:', error)
+	}
+
+	try {
 		initializeMarquee()
 		initializeCodeInput()
 	} catch (error) {
 		console.error('Error initializing interactive features:', error)
-	}
-
-	try {
-		initializeContentfulClient()
-	} catch (error) {
-		console.error('Error initializing Contentful client:', error)
 	}
 
 	try {
