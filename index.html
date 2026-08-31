@@ -29,106 +29,103 @@
     </script>
     <!-- End Inspectlet Asynchronous Code -->
 
-    <title>Pena Terminal</title>
+    <title>pena</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="six-seven.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body class="workstation-body">
+<body>
 
-    <header class="workstation-header">
-        <div class="ticker">
-            <span>The Pena Index</span>
-            <span class="price-marker">
-                <span class="price">1,998.05</span>
-                <span class="change bullish">+24.06 (+1.22%)</span>
-            </span>
-        </div>
-        <div class="market-status">
-            <div class="code-input-container">
-                <button type="button" id="code-toggle-btn" class="code-toggle-btn" aria-label="Toggle Code Input">
-                    <i class="fas fa-terminal"></i>
-                </button>
-                <input type="text" id="code-input" class="code-input" placeholder="ENTER CODE..." autocomplete="off">
-            </div>
-            <a href="simple.html" class="status-item recruiter-link">MODE: <span class="status-value">[SIMPLE VIEW]</span></a>
-            <span class="status-item">STATUS: <span class="status-value up">ONLINE ▲</span></span>
-            <span class="status-item">LOCAL TIME: <span id="local-time" class="status-value"></span></span>
-        </div>
-        <div class="info-bar">
-            <div class="weather-container">
-                <span id="weather-display" class="weather-display">🌡️ Loading weather...</span>
-            </div>
-            <div class="marquee-container">
-                <div id="marquee-text" class="marquee-text">
-                    <span class="marquee-content">Welcome to the Pena Terminal...</span>
-                    <span class="marquee-content">Welcome to the Pena Terminal...</span>
-                </div>
-            </div>
+    <header class="site-header">
+        <a href="/" class="site-logo">a.penaloza</a>
+        <nav class="site-nav" aria-label="Primary">
+            <a href="#projects" class="nav-link">projects</a>
+            <a href="#work" class="nav-link">work</a>
+            <a href="#writing" class="nav-link">writing</a>
+            <a href="#reading" class="nav-link">reading</a>
+            <a href="#contact" class="nav-link nav-link--active">contact</a>
+            <button type="button" id="code-toggle-btn" class="code-trigger" aria-label="Open command input" title="try a command">&gt;<span class="code-cursor">_</span></button>
+        </nav>
+        <div class="code-input-container" id="code-input-container">
+            <input type="text" id="code-input" class="code-input" placeholder="enter code…" autocomplete="off" aria-label="Command input">
         </div>
     </header>
 
-    <main class="workstation-grid">
-        <div id="panel-profile" class="panel">
-            <div class="panel-header">[1] ENGINEER_PROFILE &lt;GO&gt;</div>
-            <div class="panel-content">
-                <!-- This will be filled by JavaScript -->
+    <div class="ticker-band" aria-hidden="false">
+        <div class="ticker-track" id="ticker-track">
+            <!-- Populated by marquee.js -->
+        </div>
+    </div>
+
+    <main class="site-main">
+        <section id="hero" class="hero">
+            <div id="hero-content">
+                <em>Loading…</em>
             </div>
+        </section>
+
+        <div class="hairline hairline--inset" aria-hidden="true"></div>
+
+        <section id="work" class="section section--work">
+            <h2 class="section-label">WORK</h2>
+            <div id="work-content">
+                <em>Loading…</em>
+            </div>
+        </section>
+
+        <div class="hairline hairline--inset" aria-hidden="true"></div>
+
+        <div class="two-col-grid">
+            <section id="projects" class="section section--projects">
+                <h2 class="section-label">PROJECTS</h2>
+                <div id="projects-content">
+                    <em>Loading…</em>
+                </div>
+            </section>
+
+            <section id="writing" class="section section--writing">
+                <h2 class="section-label">WRITING</h2>
+                <div id="writing-content">
+                    <em>Loading…</em>
+                </div>
+            </section>
         </div>
 
-        <div id="panel-portfolio" class="panel">
-            <div class="panel-header">[2] PORTFOLIO &lt;GO&gt;</div>
-            <div class="panel-content">
-                <!-- This will be filled by JavaScript -->
-            </div>
-        </div>
+        <div class="hairline hairline--inset" aria-hidden="true"></div>
 
-        <div id="panel-blog" class="panel">
-            <div class="panel-header">[3] BLOG &lt;GO&gt;</div>
-            <div class="panel-content">
-                <!-- This will be filled by JavaScript -->
+        <section id="reading" class="section section--reading">
+            <h2 class="section-label">READING</h2>
+            <div id="reading-content">
+                <em>Loading…</em>
             </div>
-        </div>
+        </section>
 
-        <div id="panel-projects" class="panel">
-            <div class="panel-header">[4] PERSONAL PROJECTS &lt;GO&gt;</div>
-            <div class="panel-content">
-                <!-- This will be filled by JavaScript -->
-            </div>
-        </div>
-        
-        <div id="panel-contact" class="panel">
-            <div class="panel-header">[5] MSG &lt;GO&gt;</div>
-            <div class="panel-content">
-                <a href="https://github.com/apenaloza7" target="_blank" rel="noopener noreferrer" class="contact-link">
-                    <i class="fab fa-github"></i> GITHUB
-                </a>
-                <a href="https://www.linkedin.com/in/penalozaalejandro/" target="_blank" rel="noopener noreferrer" class="contact-link">
-                    <i class="fab fa-linkedin"></i> LINKEDIN
-                </a>
-                <a href="https://www.youtube.com/@penapoppin" target="_blank" rel="noopener noreferrer" class="contact-link">
-                    <i class="fab fa-youtube"></i> YOUTUBE
-                </a>
-            </div>
-        </div>
+        <div class="hairline hairline--inset" aria-hidden="true"></div>
 
-        <div id="panel-books" class="panel">
-            <div class="panel-header">[6] BOOKSHELF &lt;GO&gt;</div>
-            <div class="panel-content">
-                <!-- This will be filled by JavaScript -->
+        <section id="contact" class="section section--contact">
+            <div class="contact-copy">
+                <h2 class="contact-heading">Let's talk.</h2>
+                <p class="contact-sub">Open to interesting problems and good conversation.</p>
             </div>
-        </div>
+            <div class="contact-links">
+                <a href="https://github.com/apenaloza7" target="_blank" rel="noopener noreferrer" class="contact-link">GITHUB</a>
+                <a href="https://www.linkedin.com/in/penalozaalejandro/" target="_blank" rel="noopener noreferrer" class="contact-link">LINKEDIN</a>
+                <a href="https://www.youtube.com/@penapoppin" target="_blank" rel="noopener noreferrer" class="contact-link">YOUTUBE</a>
+            </div>
+        </section>
     </main>
 
-    <footer class="workstation-footer">
-        &copy; 2026 Alejandro Penaloza | Built with love (and <a href="https://www.cursor.com/" target="_blank" rel="noopener noreferrer">Cursor</a> && <a href="https://www.claude.ai/" target="_blank" rel="noopener noreferrer">Claude Code</a>) <span class="footer-icon">💻</span>
+    <footer class="site-footer">
+        <span class="footer-copy">© 2026 Alejandro Penaloza</span>
+        <div class="footer-socials">
+            <a href="https://github.com/apenaloza7" target="_blank" rel="noopener noreferrer">github</a>
+            <a href="https://www.linkedin.com/in/penalozaalejandro/" target="_blank" rel="noopener noreferrer">linkedin</a>
+            <a href="https://www.youtube.com/@penapoppin" target="_blank" rel="noopener noreferrer">youtube</a>
+        </div>
+        <span class="footer-built">built with love using Cursor &amp; Claude Code</span>
     </footer>
-
-    <div class="grain-overlay"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
     <script src="js/utils/contentful-client.js"></script>

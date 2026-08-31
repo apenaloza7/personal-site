@@ -4,48 +4,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="A blog post from the personal website of Alejandro Penaloza">
-    <title>Blog Post | Pena Terminal</title>
+    <title>Blog Post | Alejandro Penaloza</title>
     <link rel="icon" href="../favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body class="workstation-body">
-    <header class="workstation-header blog-header">
-        <div class="ticker">
-            <span>The Pena Index</span>
-        </div>
-        <div class="market-status">
-            <a href="../" class="status-item back-link-header">← BACK TO TERMINAL</a>
+<body class="blog-page">
+
+    <header class="site-header">
+        <a href="../" class="site-logo">a.penaloza</a>
+        <nav class="site-nav" aria-label="Primary">
+            <a href="../#projects" class="nav-link">projects</a>
+            <a href="../#work" class="nav-link">work</a>
+            <a href="../#writing" class="nav-link nav-link--active">writing</a>
+            <a href="../#reading" class="nav-link">reading</a>
+            <a href="../#contact" class="nav-link">contact</a>
+            <button type="button" id="code-toggle-btn" class="code-trigger" aria-label="Open command input" title="try a command">&gt;<span class="code-cursor">_</span></button>
+        </nav>
+        <div class="code-input-container" id="code-input-container">
+            <input type="text" id="code-input" class="code-input" placeholder="enter code…" autocomplete="off" aria-label="Command input">
         </div>
     </header>
 
-    <main class="workstation-grid blog-grid">
-        <div id="panel-blog-post" class="panel">
-            <div class="panel-header">
-                <span class="panel-header-text">[3] BLOG &lt;GO&gt;</span>
+    <main class="site-main">
+        <article class="post-article" id="post-article">
+            <p class="empty-state">Loading post…</p>
+        </article>
+
+        <section class="post-more" id="more-writing">
+            <h2 class="section-label">MORE WRITING</h2>
+            <div id="more-writing-content">
+                <p class="empty-state">Loading…</p>
             </div>
-            <div class="panel-content">
-                <div id="blog-post-content">
-                    <!-- Dynamic content will be loaded here -->
-                </div>
-            </div>
-        </div>
+        </section>
     </main>
 
-    <footer class="workstation-footer">
-        &copy; 2026 Alejandro Penaloza | Built with love (and <a href="https://www.cursor.com/" target="_blank" rel="noopener noreferrer">Cursor</a>) <span class="footer-icon">💻</span>
+    <footer class="site-footer">
+        <span class="footer-copy">© 2026 Alejandro Penaloza</span>
+        <div class="footer-socials">
+            <a href="https://github.com/apenaloza7" target="_blank" rel="noopener noreferrer">github</a>
+            <a href="https://www.linkedin.com/in/penalozaalejandro/" target="_blank" rel="noopener noreferrer">linkedin</a>
+            <a href="https://www.youtube.com/@penapoppin" target="_blank" rel="noopener noreferrer">youtube</a>
+        </div>
+        <span class="footer-built">built with love using Cursor &amp; Claude Code</span>
     </footer>
-
-    <div class="grain-overlay"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
     <script>
-        var exports = {}; // quick fix because 'exports' is not defined in rich-text bundle below
+        var exports = {};
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@contentful/rich-text-html-renderer@16.1.0/dist/rich-text-html-renderer.es5.min.js"></script>
     <script src="../js/utils/contentful-client.js"></script>
-    <script src="../js/blog.js"></script>
+    <script type="module" src="../js/blog.js"></script>
+    <script type="module">
+        import { initializeCodeInput } from '../js/features/code-input.js';
+        document.addEventListener('DOMContentLoaded', initializeCodeInput);
+    </script>
 </body>
 </html>

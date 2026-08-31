@@ -1,68 +1,63 @@
 /**
- * Portfolio panel rendering logic
+ * Work / portfolio section rendering
  */
 
 import { getContentfulEntries } from '../utils/contentful-utils.js'
 import { setLoadingState, setErrorState } from '../utils/ui-utils.js'
-import { createElement } from '../utils/dom-utils.js'
 
 /**
- * Creates role HTML for a job
- * @function createRoleHtml
- * @param {Array} roles - Array of role objects
- * @returns {string} HTML string for roles
+ * @param {Array} roles
+ * @returns {string}
  */
-const createRoleHtml = (roles = []) => {
+function buildRolePills(roles = []) {
 	return roles
-		.filter(role => role && role.fields)
-		.map(role => `
-			<div class="asset-sub">
-				<span class="asset-details">${role.fields.jobTitle || ''}</span>
-				<span class="asset-status-sub">${role.fields.dateRange || ''}</span>
-			</div>
-		`)
+		.filter((role) => role?.fields)
+		.map((role, index) => {
+			const isCurrent = index === 0
+			const pillClass = isCurrent ? 'role-pill role-pill--current' : 'role-pill'
+			return `
+				<span class="${pillClass}">
+					<span class="role-pill-title">${role.fields.jobTitle || ''}</span>
+					<span class="role-pill-range">${role.fields.dateRange || ''}</span>
+				</span>
+			`
+		})
 		.join('')
 }
 
 /**
- * Creates a job asset group element
- * @function createJobAssetGroup
- * @param {Object} job - Job fields object
- * @returns {Element} The asset group element
- */
-const createJobAssetGroup = (job) => {
-	const rolesHtml = createRoleHtml(job.roles)
-	return createElement('div', 'asset-group', `
-		<div class="asset-main">
-			<span class="asset-ticker">[${job.companyName || 'N/A'}]</span>
-			<span class="asset-status">${job.employmentDateRange || ''}</span>
-		</div>
-		${rolesHtml}
-	`)
-}
-
-/**
- * Renders the portfolio section with job data from Contentful
+ * Renders the work section from Contentful job data
  * @async
  * @function renderPortfolio
  */
 export async function renderPortfolio() {
-	const panel = document.querySelector('#panel-portfolio .panel-content')
-	if (!panel) return
+	const container = document.getElementById('work-content')
+	if (!container) return
 
-	setLoadingState(panel)
+	setLoadingState(container)
 	const entries = await getContentfulEntries({
 		content_type: 'job',
-		include: 2 // Include linked roles
+		include: 2,
 	})
 
 	if (entries.length === 0) {
-		setErrorState(panel, 'No portfolio data available.')
+		setErrorState(container, 'No work data available.')
 		return
 	}
 
-	panel.innerHTML = '' // Clear loading state
-	entries
-		.map(entry => createJobAssetGroup(entry.fields))
-		.forEach(assetGroup => panel.appendChild(assetGroup))
+	const job = entries[0].fields
+	const roles = (job.roles || []).slice().reverse()
+	const promotionCount = roles.length - 1
+	const promotionNote = promotionCount > 0
+		? `<span class="work-promotion">${promotionCount}× promoted</span>`
+		: ''
+
+	container.innerHTML = `
+		<div class="work-company-row">
+			<span class="work-company">${job.companyName || ''}</span>
+			<span class="work-tenure">${job.employmentDateRange || ''}</span>
+			${promotionNote}
+		</div>
+		<div class="role-pills">${buildRolePills(roles)}</div>
+	`
 }

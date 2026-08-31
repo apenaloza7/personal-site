@@ -7,8 +7,6 @@ import { renderPortfolio } from './panels/portfolio-panel.js'
 import { renderProjects } from './panels/projects-panel.js'
 import { renderBooks } from './panels/books-panel.js'
 import { renderBlogPosts } from './panels/blog-panel.js'
-import { initializeClock } from './features/live-clock.js'
-import { initializeWeather } from './features/weather.js'
 import { initializeMarquee } from './features/marquee.js'
 import { initializeCodeInput } from './features/code-input.js'
 
@@ -29,24 +27,19 @@ function loadAllContent() {
  * @function initializeApp
  */
 function initializeApp() {
-	// Initialize interactive features (independent of content)
 	try {
-		initializeClock()
-		initializeWeather()
 		initializeMarquee()
 		initializeCodeInput()
 	} catch (error) {
 		console.error('Error initializing interactive features:', error)
 	}
 
-	// Initialize Contentful client
 	try {
 		initializeContentfulClient()
 	} catch (error) {
 		console.error('Error initializing Contentful client:', error)
 	}
-	
-	// Load all content panels
+
 	try {
 		loadAllContent()
 	} catch (error) {
@@ -54,5 +47,4 @@ function initializeApp() {
 	}
 }
 
-// Start the application when DOM is ready
 document.addEventListener('DOMContentLoaded', initializeApp)
